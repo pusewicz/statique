@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+ruby File.read(".ruby-version").chomp
+
 source "https://rubygems.org"
 
 # Specify your gem's dependencies in statique.gemspec
