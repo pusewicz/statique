@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor", "~> 1.2.1"
   spec.add_dependency "tty-logger", "~> 0.6.0"
   spec.add_dependency "zeitwerk", "~> 2.5.3"
+  spec.add_dependency "puma", "~> 5.5.2"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
