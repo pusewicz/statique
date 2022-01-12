@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "statique/version"
-
 require "zeitwerk"
 loader = Zeitwerk::Loader.for_gem
+loader.inflector.inflect(
+  "cli" => "CLI"
+)
 loader.setup
 
 module Statique
