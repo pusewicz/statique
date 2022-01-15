@@ -25,5 +25,21 @@ module Statique
     def public?
       public.directory?
     end
+
+    def content
+      @content ||= pwd.join("content")
+    end
+
+    def content?
+      content.directory?
+    end
+
+    def layouts
+      @layouts ||= pwd.join("layouts")
+    end
+
+    def layouts?
+      layouts.directory?
+    end
   end
 end
