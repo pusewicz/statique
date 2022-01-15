@@ -2,6 +2,7 @@
 
 require "pathname"
 require "zeitwerk"
+
 loader = Zeitwerk::Loader.for_gem
 loader.inflector.inflect(
   "cli" => "CLI"
@@ -40,6 +41,14 @@ module Statique
 
     def layouts?
       layouts.directory?
+    end
+
+    def destination
+      @destination ||= pwd.join("destination")
+    end
+
+    def destination?
+      destination.directory?
     end
   end
 end

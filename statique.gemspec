@@ -37,6 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "puma", "~> 5.5.2"
   spec.add_dependency "tilt", "~> 2.0.10"
   spec.add_dependency "slim", "~> 4.1.0"
+  spec.add_dependency "http", "~> 5.0.4"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

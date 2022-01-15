@@ -24,6 +24,11 @@ module Statique
       Server.new(options.dup).run
     end
 
+    desc "build", "Build Statique site"
+    def build
+      Build.new(options.dup).run
+    end
+
     desc "version", "Prints the statique's version information"
     def version
       Statique.ui.info "Statique v#{Statique::VERSION}"
