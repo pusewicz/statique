@@ -24,7 +24,7 @@ module Statique
 
     desc "server", "Start Statique server"
     def server
-      Server.new(options.dup).run
+      Server.new(background: false).run
     end
 
     desc "build", "Build Statique site"
