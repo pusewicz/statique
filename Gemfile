@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ruby File.read(".ruby-version").chomp
+ruby File.read(File.expand_path("../.ruby-version", __FILE__)).chomp
 
 source "https://rubygems.org"
 
