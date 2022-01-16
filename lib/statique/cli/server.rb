@@ -18,12 +18,6 @@ module Statique
         @server = Puma::Server.new App.freeze.app, events
         @server.add_tcp_listener("127.0.0.1", @port)
         @server.run(@background)
-
-        if @background
-          at_exit {
-            stop
-          }
-        end
       end
 
       def stop
