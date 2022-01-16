@@ -12,9 +12,7 @@ module Statique
     plugin :render, views: Statique.content.basename, engine: "slim", allowed_paths: [Statique.content.basename, Statique.layouts.basename]
 
     route do |r|
-      if Statique.public?
-        r.public
-      end
+      r.public if Statique.public?
 
       r.root do
         view("index", engine: "slim", layout: "../layouts/layout")
