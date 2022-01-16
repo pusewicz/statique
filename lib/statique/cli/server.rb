@@ -1,7 +1,3 @@
-require "puma"
-require "puma/configuration"
-require "puma/launcher"
-
 require_relative "../app"
 
 module Statique
