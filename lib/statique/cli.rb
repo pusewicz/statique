@@ -3,6 +3,9 @@ require "tty-logger"
 
 module Statique
   class CLI < Thor
+    require_relative "cli/server"
+    require_relative "cli/build"
+
     package_name "Statique"
 
     COMMAND_ALIASES = {
