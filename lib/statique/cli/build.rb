@@ -7,7 +7,6 @@ module Statique
       end
 
       def run
-        compile_assets
         copy_public_assets
         build_pages
 
@@ -27,11 +26,6 @@ module Statique
 
       def mock_request
         @mock_request ||= Rack::MockRequest.new(Statique.app)
-      end
-
-      def compile_assets
-        Statique.ui.info "Compiling assets"
-        Statique.app.compile_assets
       end
 
       def copy_public_assets
