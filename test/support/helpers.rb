@@ -40,6 +40,15 @@ module Statique
 
           status = wait_thr.value
           command_execution.exitstatus = status.exitstatus
+
+          unless command_execution.success?
+            raise <<~ERROR
+              Invoking `#{cmd}` failed with output:
+              ----------------------------------------------------------------------
+              #{command_execution.stdboth}
+              ----------------------------------------------------------------------
+            ERROR
+          end
           command_executions << command_execution
 
           command_execution.stdout
