@@ -8,6 +8,7 @@ module Statique
 
       def run
         compile_assets
+        copy_public_assets
         start_server
         HTTP.persistent "http://127.0.0.1:3000" do |http|
           mapping.each do |from, to|
@@ -28,6 +29,11 @@ module Statique
         Statique.app.compile_assets
       end
 
+      def copy_public_assets
+        Statique.ui.info "Copying public assets"
+        FileUtils.cp_r(Statique.public.glob("**/*.*"), Statique.destination)
+      end
+
       def start_server
         @server = Server.new
         @server.run
@@ -40,14 +46,7 @@ module Statique
       def mapping
         {
           "/" => "index.html"
-        }.merge(public_mapping)
-      end
-
-      def public_mapping
-        Statique.public.glob("**/*").map do |path|
-          path = path.to_s.delete_prefix(Statique.public.to_s)
-          [path, path.delete_prefix("/")]
-        end.to_h
+        }
       end
     end
   end
