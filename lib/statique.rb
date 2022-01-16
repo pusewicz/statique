@@ -2,10 +2,16 @@
 
 require "pathname"
 
-require_relative "statique/mode"
+require_relative "statique/version"
+
+libx = File.expand_path("..", __FILE__)
+$LOAD_PATH.unshift(libx) unless $LOAD_PATH.include?(libx)
 
 module Statique
   class Error < StandardError; end
+
+  autoload :App, "statique/app"
+  autoload :Mode, "statique/mode"
 
   class << self
     attr_accessor :ui

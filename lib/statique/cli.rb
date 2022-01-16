@@ -3,9 +3,8 @@ require "tty-logger"
 
 module Statique
   class CLI < Thor
-    require_relative "cli/server"
-    require_relative "cli/build"
-    require_relative "version"
+    autoload :Server, "statique/cli/server"
+    autoload :Build, "statique/cli/build"
 
     package_name "Statique"
 

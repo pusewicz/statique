@@ -1,4 +1,4 @@
-require_relative "../app"
+require "rack"
 
 module Statique
   class CLI
