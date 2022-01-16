@@ -2,14 +2,27 @@
 
 require "pathname"
 
+require_relative "statique/mode"
+
 module Statique
   class Error < StandardError; end
 
   class << self
     attr_accessor :ui
 
+    def mode
+      @mode ||= Mode.new
+    end
+
     def app
-      @app ||= App
+      @app ||= begin
+        app = App
+        mode.build do
+          Statique.ui.info "Compiling assets", css: app.assets_opts[:css], js: app.assets_opts[:js]
+          app.compile_assets
+        end
+        app.freeze.app
+      end
     end
 
     def pwd

@@ -24,11 +24,13 @@ module Statique
 
     desc "server", "Start Statique server"
     def server
+      Statique.mode.server!
       Server.new.run
     end
 
     desc "build", "Build Statique site"
     def build
+      Statique.mode.build!
       Build.new(options.dup).run
     end
 
