@@ -35,8 +35,9 @@ module Statique
       end
 
       def copy_public_assets
-        Statique.ui.info "Copying public assets"
-        FileUtils.cp_r(Statique.public.glob("**/*.*"), Statique.destination)
+        assets = Statique.public.glob("**/*.*")
+        Statique.ui.info "Copying public assets", assets:
+        FileUtils.cp_r(assets, Statique.destination)
       end
 
       def mapping
