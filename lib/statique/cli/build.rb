@@ -13,7 +13,7 @@ module Statique
         HTTP.persistent "http://127.0.0.1:3000" do |http|
           mapping.each do |from, to|
             dst = Statique.destination.join(to)
-            Statique.ui.info "Building #{from} and writing to #{dst}"
+            Statique.ui.info "Building page", path: from.to_s
             File.write(dst, http.get(from).to_s)
           end
         end
