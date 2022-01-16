@@ -1,6 +1,5 @@
 require "roda"
 require "slim"
-require "tilt"
 
 module Statique
   class App < Roda
