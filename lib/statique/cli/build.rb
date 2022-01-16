@@ -40,7 +40,7 @@ module Statique
       end
 
       def stop_server
-        @server.stop
+        @server&.stop
       end
 
       def mapping
