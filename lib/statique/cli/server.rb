@@ -7,22 +7,19 @@ require_relative "../app"
 module Statique
   class CLI
     class Server
-      def initialize(port: 3000, background: true)
+      def initialize(port: 3000)
         @port = port
-        @background = background
       end
 
       def run
-        Statique.ui.info "Starting server", port: @port, background: @background
-        events = Puma::Events.new(EventStream.new(:info), EventStream.new(:warn))
-        @server = Puma::Server.new Statique.app, events
-        @server.add_tcp_listener("127.0.0.1", @port)
-        @server.run(@background)
+        Statique.ui.info "Starting server", port: @port
+
+        Rack::Handler::WEBrick.run(Statique.app, Port: @port, Host: "localhost")
       end
 
       def stop
         Statique.ui.info "Stopping server"
-        @server.stop(true)
+        Rack::Handler::WEBrick.shutdown
       end
 
       class EventStream
