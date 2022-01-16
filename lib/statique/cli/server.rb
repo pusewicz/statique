@@ -13,7 +13,7 @@ module Statique
       end
 
       def run
-        Statique.ui.info "Starting server on port #{@port}"
+        Statique.ui.info "Starting server", port: @port, background: @background
         events = Puma::Events.new(EventStream.new(:info), EventStream.new(:warn))
         @server = Puma::Server.new App.freeze.app, events
         @server.add_tcp_listener("127.0.0.1", @port)
@@ -21,7 +21,7 @@ module Statique
       end
 
       def stop
-        Statique.ui.info "Stopping server on port #{@port}"
+        Statique.ui.info "Stopping server"
         @server.stop(true)
       end
 
