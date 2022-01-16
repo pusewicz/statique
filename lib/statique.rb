@@ -8,6 +8,10 @@ module Statique
   class << self
     attr_accessor :ui
 
+    def app
+      @app ||= App
+    end
+
     def pwd
       @pwd ||= Pathname.pwd
     end

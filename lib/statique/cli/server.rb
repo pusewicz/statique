@@ -15,7 +15,7 @@ module Statique
       def run
         Statique.ui.info "Starting server", port: @port, background: @background
         events = Puma::Events.new(EventStream.new(:info), EventStream.new(:warn))
-        @server = Puma::Server.new App.freeze.app, events
+        @server = Puma::Server.new Statique.app, events
         @server.add_tcp_listener("127.0.0.1", @port)
         @server.run(@background)
       end
