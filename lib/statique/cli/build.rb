@@ -1,4 +1,4 @@
-require "http"
+require "rack/mock"
 
 module Statique
   class CLI
@@ -9,20 +9,25 @@ module Statique
       def run
         compile_assets
         copy_public_assets
-        start_server
-        HTTP.persistent "http://127.0.0.1:3000" do |http|
-          mapping.each do |from, to|
-            dst = Statique.destination.join(to)
-            Statique.ui.info "Building page", path: from.to_s
-            File.write(dst, http.get(from).to_s)
-          end
-        end
+        build_pages
+
         Statique.ui.success "Done!"
-      ensure
-        stop_server
       end
 
       private
+
+      def build_pages
+        mapping.each do |from, to|
+          response = mock_request.get(from)
+          dst = Statique.destination.join(to)
+          Statique.ui.info "Building page", path: from.to_s
+          File.write(dst, response.body)
+        end
+      end
+
+      def mock_request
+        @mock_request ||= Rack::MockRequest.new(Statique.app)
+      end
 
       def compile_assets
         Statique.ui.info "Compiling assets"
@@ -32,15 +37,6 @@ module Statique
       def copy_public_assets
         Statique.ui.info "Copying public assets"
         FileUtils.cp_r(Statique.public.glob("**/*.*"), Statique.destination)
-      end
-
-      def start_server
-        @server = Server.new
-        @server.run
-      end
-
-      def stop_server
-        @server&.stop
       end
 
       def mapping
