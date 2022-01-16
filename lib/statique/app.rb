@@ -10,7 +10,12 @@ module Statique
     end
 
     plugin :render, views: Statique.content.basename, engine: "slim", allowed_paths: [Statique.content.basename, Statique.layouts.basename]
-    plugin :assets, css: "site.css", js: "site.js"
+
+    if Statique.assets?
+      css_files = Statique.assets.join("css").glob("*.{css,scss}")
+      js_files = Statique.assets.join("js").glob("*.js")
+      plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.destination
+    end
 
     route do |r|
       r.public if Statique.public?
