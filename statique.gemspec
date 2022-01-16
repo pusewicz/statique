@@ -33,7 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "roda", "~> 3.51.0"
   spec.add_dependency "thor", "~> 1.2.1"
   spec.add_dependency "tty-logger", "~> 0.6.0"
-  spec.add_dependency "zeitwerk", "~> 2.5.3"
   spec.add_dependency "puma", "~> 5.5.2"
   spec.add_dependency "tilt", "~> 2.0.10"
   spec.add_dependency "slim", "~> 4.1.0"
