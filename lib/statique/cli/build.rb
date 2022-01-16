@@ -7,6 +7,7 @@ module Statique
       end
 
       def run
+        compile_assets
         start_server
         HTTP.persistent "http://127.0.0.1:3000" do |http|
           mapping.each do |from, to|
@@ -21,6 +22,11 @@ module Statique
       end
 
       private
+
+      def compile_assets
+        Statique.ui.info "Compiling assets"
+        Statique.app.compile_assets
+      end
 
       def start_server
         @server = Server.new
