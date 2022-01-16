@@ -36,6 +36,14 @@ module Statique
       layouts.directory?
     end
 
+    def assets
+      @assets ||= pwd.join("assets")
+    end
+
+    def assets?
+      assets.directory?
+    end
+
     def destination
       @destination ||= pwd.join("destination")
     end
