@@ -1,0 +1,16 @@
+module Statique
+  class Mode
+    MODE_BUILD: "build"
+    MODE_SERVER: "server"
+    MODES: ["build", "server"]
+    @mode: "build" | "server"
+
+    def initialize: (?mode: "build" | "server") -> void
+    def server!: -> "server"
+    def build!: -> "build"
+    def server?: -> bool
+    def build?: -> bool
+    def server: -> nil
+    def build: -> nil
+  end
+end

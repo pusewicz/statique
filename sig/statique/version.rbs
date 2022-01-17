@@ -1,0 +1,3 @@
+module Statique
+  VERSION: String
+end
