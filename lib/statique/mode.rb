@@ -7,7 +7,9 @@ module Statique
     MODES = [MODE_BUILD, MODE_SERVER].freeze
 
     def initialize(mode = MODE_SERVER)
-      raise ArgumentError, "Invalid value `#{mode}' for mode. Must be one of #{MODES.inspect}" unless MODES.include?(mode.to_s)
+      raise ArgumentError, "Mode can't be empty" if mode.nil? || mode.empty?
+      raise ArgumentError, "Mode must be one of #{MODES}" unless MODES.include?(mode.to_s)
+
       @mode = mode.to_s
     end
 
