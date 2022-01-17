@@ -29,12 +29,12 @@ module Statique
       @mode == MODE_BUILD
     end
 
-    def server(&blk)
-      blk&.call if server?
+    def server
+      yield if server?
     end
 
-    def build(&blk)
-      blk&.call if build?
+    def build
+      yield if build?
     end
   end
 end
