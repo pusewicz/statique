@@ -28,11 +28,11 @@ module Statique
     end
 
     def server(&blk)
-      blk.call if server?
+      blk&.call if server?
     end
 
     def build(&blk)
-      blk.call if build?
+      blk&.call if build?
     end
   end
 end
