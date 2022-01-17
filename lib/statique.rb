@@ -11,13 +11,19 @@ module Statique
   class Error < StandardError; end
 
   autoload :App, "statique/app"
+  autoload :Discover, "statique/discover"
   autoload :Mode, "statique/mode"
+  autoload :Route, "statique/route"
 
   class << self
     attr_accessor :ui
 
     def mode
       @mode ||= Mode.new
+    end
+
+    def discover
+      @discover ||= Discover.new(Statique.content)
     end
 
     def app

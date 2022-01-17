@@ -16,11 +16,16 @@ module Statique
       private
 
       def build_pages
-        mapping.each do |from, to|
-          response = mock_request.get(from)
-          dst = Statique.destination.join(to)
-          Statique.ui.info "Building page", path: from.to_s
-          File.write(dst, response.body)
+        Statique.discover.each do |path, file|
+          response = mock_request.get(path)
+          if response.successful?
+            destination = Statique.destination.join("./#{path}/index.html")
+            Statique.ui.info "Building page", path: path.to_s
+            FileUtils.mkdir_p(destination.dirname)
+            File.write(destination, response.body)
+          else
+            Statique.ui.error "Error building page", path: path.to_s, status: response.status
+          end
         end
       end
 
@@ -32,12 +37,6 @@ module Statique
         assets = Statique.public.glob("**/*.*")
         Statique.ui.info "Copying public assets", assets:
         FileUtils.cp_r(assets, Statique.destination)
-      end
-
-      def mapping
-        {
-          "/" => "index.html"
-        }
       end
     end
   end
