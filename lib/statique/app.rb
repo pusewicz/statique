@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "roda"
 require "slim"
 
@@ -9,6 +11,7 @@ module Statique
       plugin :public, root: Statique.public.basename
     end
 
+    plugin :static_routing
     plugin :render, views: Statique.content.basename, engine: "slim", allowed_paths: [Statique.content.basename, Statique.layouts.basename]
 
     if Statique.assets?
@@ -17,13 +20,16 @@ module Statique
       plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.destination
     end
 
+    Statique.discover.each do |route|
+      Statique.ui.info "Route", mount: route.mount_point, view: route.view_name, engine: route.engine_name
+      static_get route.mount_point do |r|
+        view(route.view_name, engine: route.engine_name, layout: "../layouts/layout")
+      end
+    end
+
     route do |r|
       r.public if Statique.public?
       r.assets if Statique.assets?
-
-      r.root do
-        view("index", engine: "slim", layout: "../layouts/layout")
-      end
     end
   end
 end
