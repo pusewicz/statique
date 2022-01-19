@@ -12,8 +12,8 @@ module Statique
 
   autoload :App, "statique/app"
   autoload :Discover, "statique/discover"
+  autoload :Document, "statique/document"
   autoload :Mode, "statique/mode"
-  autoload :Route, "statique/route"
 
   class << self
     def mode

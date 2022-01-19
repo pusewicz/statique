@@ -16,7 +16,7 @@ module Statique
       private
 
       def build_pages
-        Statique.discover.each do |path, file|
+        Statique.discover.routes.each do |path, file|
           response = mock_request.get(path)
           if response.successful?
             destination = Statique.destination.join("./#{path}/index.html")

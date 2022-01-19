@@ -20,10 +20,10 @@ module Statique
       plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.destination
     end
 
-    Statique.discover.each do |route|
       Statique.ui.info "Route", mount: route.mount_point, view: route.view_name, engine: route.engine_name
       static_get route.mount_point do |r|
         view(route.view_name, engine: route.engine_name, layout: "../layouts/layout")
+    Statique.discover.routes.each do |route, document|
       end
     end
 
