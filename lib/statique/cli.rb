@@ -14,8 +14,6 @@ module Statique
 
     def initialize(*args)
       super
-    ensure
-      Statique.ui = TTY::Logger.new(output: $stdout)
     end
 
     def self.aliases_for(command_name)

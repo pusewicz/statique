@@ -16,14 +16,16 @@ module Statique
   autoload :Route, "statique/route"
 
   class << self
-    attr_accessor :ui
-
     def mode
       @mode ||= Mode.new
     end
 
     def discover
       @discover ||= Discover.new(Statique.content)
+    end
+
+    def ui
+      @ui ||= TTY::Logger.new(output: $stdout)
     end
 
     def app
