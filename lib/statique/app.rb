@@ -10,6 +10,7 @@ module Statique
     plugin :environments
     plugin :static_routing
     plugin :render, views: Statique.content.basename, engine: "slim", allowed_paths: [Statique.content.basename, Statique.layouts.basename]
+    plugin :render_locals, render: {statique: Statique}, merge: true
 
     if Statique.mode.server? && Statique.public?
       plugin :public, root: Statique.public.basename
