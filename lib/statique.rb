@@ -16,6 +16,10 @@ module Statique
   autoload :Mode, "statique/mode"
 
   class << self
+    def version
+      VERSION
+    end
+
     def mode
       @mode ||= Mode.new
     end
