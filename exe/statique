@@ -16,4 +16,6 @@ else
   require "statique/cli"
 end
 
+Statique.ui.info "Statique", version: Statique::VERSION, environment: ENV["RACK_ENV"]
+
 Statique::CLI.start
