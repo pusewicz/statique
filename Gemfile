@@ -15,5 +15,6 @@ gem "minitest-around", "~> 0.5.0"
 gem "standard", "~> 1.3"
 gem "rbs"
 gem "typeprof"
+gem "solargraph"
 
 gem "overcommit"
