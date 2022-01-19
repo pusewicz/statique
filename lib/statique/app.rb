@@ -43,7 +43,7 @@ module Statique
         locals = {
           document:
         }
-        view(document.view_name, engine: document.engine_name, layout: "../layouts/#{document.layout_name}", locals:, layout_opts: {locals:})
+        view(document.view_name, inline: document.content, engine: document.engine_name, layout: "../layouts/#{document.layout_name}", locals:, layout_opts: {locals:})
       end
     end
   end

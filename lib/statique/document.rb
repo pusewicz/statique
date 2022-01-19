@@ -3,11 +3,11 @@ require "hashie"
 
 module Statique
   class Document
-    attr_reader :file, :meta
+    attr_reader :file, :meta, :content
 
     def initialize(file)
       parsed = FrontMatterParser::Parser.parse_file(file)
-      @file, @meta = file, Hashie::Mash.new(parsed.front_matter)
+      @file, @meta, @content = file.freeze, Hashie::Mash.new(parsed.front_matter).freeze, parsed.content.freeze
     end
 
     def mount_point
@@ -19,11 +19,11 @@ module Statique
     end
 
     def view_name
-      basename.delete_suffix(extname).freeze
+      basename.delete_suffix(extname)
     end
 
     def engine_name
-      extname.delete_prefix(".").freeze
+      extname.delete_prefix(".")
     end
 
     def layout_name
