@@ -7,12 +7,16 @@ module Statique
     attr_reader :routes, :documents, :collections, :files
 
     def initialize(root)
-      @files = root.glob("**/*.{slim,md}")
+      @files = root.glob("**/*.{slim,md}").freeze
       @documents = {}
       @collections = Hash.new { |hash, key| hash[key] = Set.new }
       @routes = {}
 
       discover!
+
+      @documents.freeze
+      @routes.freeze
+      @collections.freeze
     end
 
     private
