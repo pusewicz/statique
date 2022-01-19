@@ -19,19 +19,19 @@ module Statique
     end
 
     def view_name
-      basename.delete_suffix(extname)
+      basename.delete_suffix(extname).freeze
     end
 
     def engine_name
-      extname.delete_prefix(".")
+      extname.delete_prefix(".").freeze
     end
 
     def layout_name
-      meta.fetch("layout") { "layout" }
+      meta.fetch("layout") { "layout" }.freeze
     end
 
     def title
-      meta.title
+      meta.title.freeze
     end
 
     private
