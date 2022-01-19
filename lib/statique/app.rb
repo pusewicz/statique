@@ -20,6 +20,11 @@ module Statique
       js_files = Statique.assets.join("js").glob("*.js")
       plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.destination
       plugin :assets_preloading
+
+      Statique.mode.build do
+        compiled = compile_assets
+        Statique.ui.info "Compiling assets", css: compiled["css"], js: compiled["js"]
+      end
     end
 
     Statique.discover.routes.each do |route, document|

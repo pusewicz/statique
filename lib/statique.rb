@@ -31,10 +31,6 @@ module Statique
     def app
       @app ||= begin
         app = App
-        mode.build do
-          Statique.ui.info "Compiling assets", css: app.assets_opts[:css], js: app.assets_opts[:js]
-          app.compile_assets
-        end
         app.freeze.app
       end
     end
