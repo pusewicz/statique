@@ -10,7 +10,7 @@ class Statique
       raise ArgumentError, "Mode can't be empty" if mode.nil? || mode.empty?
       raise ArgumentError, "Mode must be one of #{MODES}" unless MODES.include?(mode.to_s)
 
-      @mode = mode.to_s
+      @mode = mode == MODE_SERVER ? MODE_SERVER : MODE_BUILD
     end
 
     def server!
