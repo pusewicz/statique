@@ -14,10 +14,6 @@ module Statique
 
     if Statique.mode.server? && Statique.public?
       plugin :public, root: Statique.public.basename
-
-      route do |r|
-        r.public
-      end
     end
 
     if Statique.assets?
@@ -25,12 +21,6 @@ module Statique
       js_files = Statique.assets.join("js").glob("*.js")
       plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.destination, precompiled: Statique.destination.join("assets/manifest.json")
       plugin :assets_preloading
-
-      if Statique.mode.server?
-        route do |r|
-          r.assets
-        end
-      end
 
       Statique.mode.build do
         compiled = compile_assets
@@ -44,6 +34,14 @@ module Statique
           document:
         }
         view(document.view_name, inline: document.content, engine: document.engine_name, layout: "../layouts/#{document.layout_name}", locals:, layout_opts: {locals:})
+      end
+    end
+
+    if Statique.mode.server?
+      # Mout routes at once, as calling #route clears the previous block
+      route do |r|
+        r.public if Statique.public?
+        r.assets if Statique.assets
       end
     end
   end
