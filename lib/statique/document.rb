@@ -13,7 +13,7 @@ class Statique
       case basename
       when "index.slim" then "/"
       else
-        "/#{basename.delete_suffix(extname).delete_prefix(Statique.instance.content.to_s)}"
+        "/#{meta.permalink || basename.delete_suffix(extname).delete_prefix(Statique.instance.content.to_s)}"
       end.freeze
     end
 
