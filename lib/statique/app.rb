@@ -31,11 +31,11 @@ class Statique
     end
 
     statique.discover.routes.each do |route, document|
-      Statique.ui.info route, engine: document.engine_name, layout: document.layout_name, kls: document.layout_name.class.name
       static_get route do |r|
         locals = {
           document:
         }
+
         if document.layout_name
           view(document.view_name, inline: document.content, engine: document.engine_name, layout: "../layouts/#{document.layout_name}", locals:, layout_opts: {locals:})
         else
