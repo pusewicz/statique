@@ -2,6 +2,7 @@
 
 require "roda"
 require "slim"
+require "digest/sha1"
 
 class Statique
   class App < Roda
@@ -43,6 +44,7 @@ class Statique
           inline: @document.content,
           locals:,
           layout_opts: {locals:},
+          cache_key: Digest::SHA1.hexdigest(@document.file.to_s + @document.content),
           layout: "../layouts/#{@document.layout_name}"
         }
 
