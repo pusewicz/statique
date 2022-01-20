@@ -3,6 +3,7 @@
 require "pathname"
 require "singleton"
 require "front_matter_parser"
+require "uri"
 
 require_relative "statique/version"
 
@@ -86,6 +87,16 @@ class Statique
   def destination?
     destination.directory?
   end
+
+  def root_url
+    # TODO: Make it configurable
+    @root_url ||= URI("https://www.layer22.com").freeze
+  end
+
+  def url(document)
+    URI.join(root_url, document.mount_point)
+  end
+
   private
 
   def register_front_matter_parsers
