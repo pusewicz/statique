@@ -36,7 +36,11 @@ class Statique
         locals = {
           document:
         }
-        view(document.view_name, inline: document.content, engine: document.engine_name, layout: "../layouts/#{document.layout_name}", locals:, layout_opts: {locals:})
+        if document.layout_name
+          view(document.view_name, inline: document.content, engine: document.engine_name, layout: "../layouts/#{document.layout_name}", locals:, layout_opts: {locals:})
+        else
+          render(document.view_name, inline: document.content, engine: document.engine_name, locals:, layout_opts: {locals:})
+        end
       end
     end
 
