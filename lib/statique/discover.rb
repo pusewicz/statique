@@ -17,7 +17,7 @@ class Statique
     def initialize(root)
       @files = root.glob(GLOB).freeze
       @documents = {}
-      @collections = Hash.new { |hash, key| hash[key] = Set.new }
+      @collections = Hashie::Mash.new { |hash, key| hash[key] = Set.new }
       @routes = {}
 
       discover!
