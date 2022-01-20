@@ -17,6 +17,10 @@ class Statique
           define_method(type) do |msg|
             log(type, msg)
           end
+
+          define_method(:"#{type}?") do
+            Statique.ui.compare_levels(Statique.ui.class.config.level, type.to_sym) != :lt
+          end
         end
       end
 
