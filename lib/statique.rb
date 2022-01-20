@@ -46,7 +46,7 @@ class Statique
 
   def self.ui
     @ui ||= TTY::Logger.new(output: $stdout) do |config|
-      config.level = :debug if instance.mode.server?
+      config.level = :debug if ENV["DEBUG"] == "true"
     end
   end
 
