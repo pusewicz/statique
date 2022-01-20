@@ -12,7 +12,7 @@ class Statique
     plugin :environments
     plugin :static_routing
     plugin :render, views: statique.content.basename, engine: "slim", allowed_paths: [statique.content.basename, statique.layouts.basename]
-    plugin :render_locals, render: {statique:, documents: statique.discover.documents.values}, merge: true
+    plugin :render_locals, render: {statique:, documents: statique.discover.documents.values, collections: statique.discover.collections}, merge: true
 
     if statique.mode.server? && statique.public?
       plugin :public, root: statique.public.basename
