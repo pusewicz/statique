@@ -17,6 +17,8 @@ class Statique
       end.freeze
     end
 
+    alias_method :path, :mount_point
+
     def view_name
       basename.delete_suffix(extname).freeze
     end
