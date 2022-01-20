@@ -35,7 +35,9 @@ class Statique
 
         @documents[file], @routes[document.mount_point] = document, document
 
-        @collections[document.meta.collection] << document
+        Array(document.meta.collection).each do |collection|
+          @collections[collection] << document
+        end
       end
     end
   end
