@@ -33,14 +33,23 @@ class Statique
     statique.discover.routes.each do |route, document|
       Statique.ui.debug "Defining route", {route:, file: document.file}
       static_get route do |r|
+        @document = statique.discover.documents[document.file.to_s]
+
         locals = {
-          document:
+          document: @document
+        }
+        options = {
+          engine: @document.engine_name,
+          inline: @document.content,
+          locals:,
+          layout_opts: {locals:},
+          layout: "../layouts/#{@document.layout_name}"
         }
 
         if document.layout_name
-          view(document.view_name, inline: document.content, engine: document.engine_name, layout: "../layouts/#{document.layout_name}", locals:, layout_opts: {locals:})
+          view(options)
         else
-          render(document.view_name, inline: document.content, engine: document.engine_name, locals:, layout_opts: {locals:})
+          render(options)
         end
       end
     end
