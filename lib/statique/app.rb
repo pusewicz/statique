@@ -31,6 +31,7 @@ class Statique
     end
 
     statique.discover.routes.each do |route, document|
+      Statique.ui.debug "Defining route", {route:, file: document.file}
       static_get route do |r|
         locals = {
           document:
