@@ -2,6 +2,7 @@
 
 require "pathname"
 require "singleton"
+require "front_matter_parser"
 
 require_relative "statique/version"
 
@@ -17,6 +18,10 @@ class Statique
   autoload :Discover, "statique/discover"
   autoload :Document, "statique/document"
   autoload :Mode, "statique/mode"
+
+  def initialize
+    register_front_matter_parsers
+  end
 
   def app
     @app ||= App.freeze.app
@@ -81,5 +86,9 @@ class Statique
   def destination?
     destination.directory?
   end
+  private
+
+  def register_front_matter_parsers
+    ::FrontMatterParser::SyntaxParser.const_set(:Builder, FrontMatterParser::SyntaxParser::MultiLineComment["=begin", "=end"])
   end
 end

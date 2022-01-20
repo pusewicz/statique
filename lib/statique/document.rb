@@ -1,4 +1,3 @@
-require "front_matter_parser"
 require "hashie"
 
 class Statique

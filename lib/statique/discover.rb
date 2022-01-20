@@ -6,8 +6,16 @@ class Statique
   class Discover
     attr_reader :routes, :documents, :collections, :files
 
+    SUPPORTED_EXTENSIONS = %w[
+      slim
+      md
+      builder
+    ].freeze
+
+    GLOB = "**/*.{#{SUPPORTED_EXTENSIONS.join(",")}}"
+
     def initialize(root)
-      @files = root.glob("**/*.{slim,md}").freeze
+      @files = root.glob(GLOB).freeze
       @documents = {}
       @collections = Hash.new { |hash, key| hash[key] = Set.new }
       @routes = {}
