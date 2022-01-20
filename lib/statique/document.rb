@@ -1,7 +1,7 @@
 require "front_matter_parser"
 require "hashie"
 
-module Statique
+class Statique
   class Document
     attr_reader :file, :meta, :content
 
@@ -14,7 +14,7 @@ module Statique
       case basename
       when "index.slim" then "/"
       else
-        "/#{basename.delete_suffix(extname).delete_prefix(Statique.content.to_s)}"
+        "/#{basename.delete_suffix(extname).delete_prefix(Statique.instance.content.to_s)}"
       end.freeze
     end
 

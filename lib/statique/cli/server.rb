@@ -1,6 +1,6 @@
 require "rack"
 
-module Statique
+class Statique
   class CLI
     class Server
       def initialize(port: 3000)
@@ -17,12 +17,11 @@ module Statique
       def run
         Statique.ui.info "Starting server", port: @port
 
-        Rack::Handler::WEBrick.run(Statique.app, {
+        Rack::Handler::WEBrick.run(Statique.instance.app,
           Port: @port,
           Host: "localhost",
           Logger: Statique.ui,
-          AccessLog: [[LoggerWrapper.new, "%m:%U:%s"]]
-        })
+          AccessLog: [[LoggerWrapper.new, "%m:%U:%s"]])
       end
 
       def stop

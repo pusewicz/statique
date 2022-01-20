@@ -1,9 +1,12 @@
 require "rack/mock"
 
-module Statique
+class Statique
   class CLI
     class Build
+      attr_reader :statique
+
       def initialize(options)
+        @statique = Statique.instance
       end
 
       def run
@@ -16,10 +19,10 @@ module Statique
       private
 
       def build_pages
-        Statique.discover.routes.each do |path, file|
+        statique.discover.routes.each do |path, file|
           response = mock_request.get(path)
           if response.successful?
-            destination = Statique.destination.join("./#{path}/index.html")
+            destination = statique.destination.join("./#{path}/index.html")
             Statique.ui.info "Building page", path: path.to_s
             FileUtils.mkdir_p(destination.dirname)
             File.write(destination, response.body)
@@ -30,13 +33,13 @@ module Statique
       end
 
       def mock_request
-        @mock_request ||= Rack::MockRequest.new(Statique.app)
+        @mock_request ||= Rack::MockRequest.new(statique.app)
       end
 
       def copy_public_assets
-        assets = Statique.public.glob("**/*.*")
+        assets = statique.public.glob("**/*.*")
         Statique.ui.info "Copying public assets", assets:
-        FileUtils.cp_r(assets, Statique.destination)
+        FileUtils.cp_r(assets, statique.destination)
       end
     end
   end

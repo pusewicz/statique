@@ -2,7 +2,7 @@
 
 require "set"
 
-module Statique
+class Statique
   class Discover
     attr_reader :routes, :documents, :collections, :files
 

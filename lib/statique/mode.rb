@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Statique
+class Statique
   class Mode
     MODE_BUILD = "build"
     MODE_SERVER = "server"

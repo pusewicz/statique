@@ -1,7 +1,7 @@
 require "thor"
 require "tty-logger"
 
-module Statique
+class Statique
   class CLI < Thor
     autoload :Server, "statique/cli/server"
     autoload :Build, "statique/cli/build"
@@ -22,19 +22,19 @@ module Statique
 
     desc "server", "Start Statique server"
     def server
-      Statique.mode.server!
+      Statique.instance.mode.server!
       Server.new.run
     end
 
     desc "build", "Build Statique site"
     def build
-      Statique.mode.build!
+      Statique.instance.mode.build!
       Build.new(options.dup).run
     end
 
     desc "version", "Prints the statique's version information"
     def version
-      Statique.ui.info "Statique v#{Statique::VERSION}"
+      Statique.instance.ui.info "Statique v#{Statique::VERSION}"
     end
 
     map aliases_for("version")
