@@ -33,6 +33,14 @@ class Statique
       meta.title.freeze
     end
 
+    def body
+      content
+    end
+
+    def published_at
+      @published_at ||= file.ctime.freeze
+    end
+
     private
 
     def basename
