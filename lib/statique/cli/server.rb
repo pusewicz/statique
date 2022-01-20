@@ -7,10 +7,22 @@ module Statique
         @port = port
       end
 
+      class LoggerWrapper
+        def <<(msg)
+          method, uri, status = msg.chomp.split(":")
+          Statique.ui.info "#{method} #{uri}", status: status.to_i
+        end
+      end
+
       def run
         Statique.ui.info "Starting server", port: @port
 
-        Rack::Handler::WEBrick.run(Statique.app, Port: @port, Host: "localhost")
+        Rack::Handler::WEBrick.run(Statique.app, {
+          Port: @port,
+          Host: "localhost",
+          Logger: Statique.ui,
+          AccessLog: [[LoggerWrapper.new, "%m:%U:%s"]]
+        })
       end
 
       def stop
