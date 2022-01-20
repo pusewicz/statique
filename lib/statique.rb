@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
+require "front_matter_parser"
+require "hashie"
 require "pathname"
 require "singleton"
-require "front_matter_parser"
 require "uri"
 
 require_relative "statique/version"
