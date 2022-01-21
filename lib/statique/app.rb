@@ -6,9 +6,11 @@ require "digest/sha1"
 require "pagy"
 require "pagy/extras/array"
 require "rack/rewrite"
+require "forwardable"
 
 class Statique
   class App < Roda
+    extend Forwardable
     PAGE_REGEX = /(.*)\/page\/(\d+)/
     use Rack::Rewrite do
       rewrite PAGE_REGEX, "$1?page=$2"
@@ -18,6 +20,8 @@ class Statique
     include Pagy::Frontend
 
     Pagy::DEFAULT[:items] = 3
+
+    def_delegators :Statique, :url, :root_url
 
     def pagination_nav
       pagy_nav(@pagy).gsub(/\?page=(\d+)/, '/page/\1')
