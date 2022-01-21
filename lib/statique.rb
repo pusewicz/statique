@@ -91,7 +91,7 @@ class Statique
   end
 
   def root_url
-    @root_url ||= URI("https://www.layer22.com").freeze
+    @root_url ||= "/"
   end
 
   def url(document)
