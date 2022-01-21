@@ -52,5 +52,3 @@ PostCommit:
 PrePush:
   Minitest:
     enabled: true
-  Brakeman:
-    enabled: true
