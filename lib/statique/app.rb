@@ -43,7 +43,7 @@ class Statique
 
       statique.mode.build do
         compiled = compile_assets
-        statique.ui.info "Compiling assets", css: compiled["css"], js: compiled["js"]
+        Statique.ui.info "Compiling assets", css: compiled["css"], js: compiled["js"]
       end
     end
 
