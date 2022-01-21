@@ -21,7 +21,7 @@ class Statique
         Statique.discover.routes.each do |path, file|
           response = mock_request.get(path)
           if response.successful?
-            destination = Statique.destination.join("./#{path}/index.html")
+            destination = Statique.destination.join(File.extname(path).empty? ? "./#{path}/index.html" : "./#{path}")
             Statique.ui.info "Building page", path: path.to_s
             FileUtils.mkdir_p(destination.dirname)
             File.write(destination, response.body)
