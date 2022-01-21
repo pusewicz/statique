@@ -37,6 +37,8 @@ class Statique
 
     def discover_files!
       @files = @root.glob(GLOB)
+    ensure
+      Statique.ui.debug "Discovered files", count: @files.size
     end
 
     def discover!
