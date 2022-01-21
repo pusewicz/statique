@@ -1,6 +1,6 @@
 require_relative "command_execution"
 
-module Statique
+class Statique
   module Support
     module Helpers
       def statique(cmd)

@@ -1,4 +1,4 @@
-module Statique
+class Statique
   module Support
     CommandExecution = Struct.new(:command, :working_directory, :exitstatus, :stdout, :stderr) do
       def to_s
