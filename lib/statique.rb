@@ -80,7 +80,7 @@ class Statique
     end
 
     def destination
-      @destination ||= pwd.join("destination").freeze
+      @destination ||= pwd.join("dist").freeze
     end
 
     def destination?
