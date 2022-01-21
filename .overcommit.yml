@@ -33,7 +33,7 @@ PreCommit:
     enabled: true
     on_warn: fail # Treat all warnings as failures
   LicenseFinder:
-    enabled: true
+    enabled: false
   MergeConflicts:
     enabled: true
 
