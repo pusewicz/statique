@@ -23,14 +23,14 @@ class Statique
       discover_files!
       discover!
 
-      statique.mode.build do
+      Statique.mode.build do
         @files.freeze
         @documents.freeze
         @routes.freeze
         @collections.freeze
       end
 
-      watch_for_changes if statique.mode.server?
+      watch_for_changes if Statique.mode.server?
     end
 
     private
@@ -60,7 +60,7 @@ class Statique
     def watch_for_changes
       require "filewatcher"
 
-      @filewatcher = Filewatcher.new([statique.content, statique.layouts])
+      @filewatcher = Filewatcher.new([Statique.content, Statique.layouts])
       @filewatcher_thread = Thread.new(@filewatcher) do |watcher|
         watcher.watch do |file, event|
           Statique.ui.debug "File change event", file: file, event: event
@@ -92,10 +92,6 @@ class Statique
       if document
         routes.delete(document.mount_point)
       end
-    end
-
-    def statique
-      Statique.instance
     end
   end
 end

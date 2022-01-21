@@ -35,7 +35,7 @@ class Statique
 
         logger = LoggerWrapper.new
 
-        Rack::Handler::WEBrick.run(Statique.instance.app,
+        Rack::Handler::WEBrick.run(Statique.app,
           Port: @port,
           Host: "localhost",
           Logger: logger,
