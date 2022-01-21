@@ -34,6 +34,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "filewatcher", "~> 1.1.1"
   spec.add_dependency "front_matter_parser", "~> 1.0.1"
   spec.add_dependency "hashie", "~> 5.0.0"
+  spec.add_dependency "pagy", "~> 5.9"
+  spec.add_dependency "rack-rewrite", "~> 1.5.1"
   spec.add_dependency "roda", "~> 3.51.0"
   spec.add_dependency "sassc", "~> 2.4.0"
   spec.add_dependency "slim", "~> 4.1.0"
