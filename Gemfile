@@ -19,3 +19,6 @@ gem "solargraph"
 
 gem "overcommit"
 gem "bundle-audit", "~> 0.1.0"
+
+gem "rubocop-minitest", "~> 0.17.0"
+gem "rubocop-rake", "~> 0.6.0"
