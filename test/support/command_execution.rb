@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Statique
   module Support
     CommandExecution = Struct.new(:command, :working_directory, :exitstatus, :stdout, :stderr) do
