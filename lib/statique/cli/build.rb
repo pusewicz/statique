@@ -19,15 +19,15 @@ class Statique
       private
 
       def build_pages
-        Statique.discover.routes.each do |path, file|
-          response = mock_request.get(path)
+        Statique.discover.documents.each do |document|
+          response = mock_request.get(document.path)
           if response.successful?
-            destination = Statique.destination.join(File.extname(path).empty? ? "./#{path}/index.html" : "./#{path}")
-            Statique.ui.info "Building page", path: path.to_s
+            destination = Statique.destination.join(File.extname(document.path).empty? ? "./#{document.path}/index.html" : "./#{document.path}")
+            Statique.ui.info "Building page", path: document.path
             FileUtils.mkdir_p(destination.dirname)
             File.write(destination, response.body)
           else
-            Statique.ui.error "Error building page", path: path.to_s, status: response.status
+            Statique.ui.error "Error building page", path: document.path, status: response.status
           end
         end
       end

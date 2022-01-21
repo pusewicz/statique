@@ -4,7 +4,7 @@ require "set"
 
 class Statique
   class Discover
-    attr_reader :routes, :documents, :collections, :files
+    attr_reader :documents, :collections, :files
 
     SUPPORTED_EXTENSIONS = %w[
       slim
@@ -16,9 +16,8 @@ class Statique
 
     def initialize(root)
       @root = root
-      @documents = {}
+      @documents = []
       @collections = Hashie::Mash.new { |hash, key| hash[key] = Set.new }
-      @routes = {}
 
       discover_files!
       discover!
@@ -26,7 +25,6 @@ class Statique
       Statique.mode.build do
         @files.freeze
         @documents.freeze
-        @routes.freeze
         @collections.freeze
       end
 
@@ -50,7 +48,7 @@ class Statique
     def process(file)
       document = Document.new(file)
 
-      documents[file.to_s], routes[document.mount_point] = document, document
+      documents << document
 
       Array(document.meta.collection).each do |collection|
         collections[collection] << document
@@ -81,16 +79,10 @@ class Statique
     end
 
     def remove_file!(path)
-      document = documents[path.to_s]
-
+      documents.delete_if { _1.file == path }
       collections.each_value do |collection|
         # TODO: See if set can index by some particular property to avoid looping
         collection.delete_if { _1.file == path }
-      end
-      documents.delete(path.to_s)
-
-      if document
-        routes.delete(document.mount_point)
       end
     end
   end

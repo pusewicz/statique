@@ -92,7 +92,7 @@ class Statique
     end
 
     def url(document)
-      File.join(root_url, document.mount_point)
+      File.join(root_url, document.path)
     end
   end
 end

@@ -50,13 +50,13 @@ class Statique
       end
     end
 
-    Statique.discover.routes.each do |path, document|
-      Statique.ui.debug "Defining route", {path:, file: document.file}
-      static_get path do |r|
-        @document = Statique.discover.documents[document.file.to_s]
+    Statique.discover.documents.each do |document|
+      Statique.ui.debug "Defining route", {path: document.path, file: document.file}
+      static_get document.path do |r|
+        @document = Statique.discover.documents.find { _1.file == document.file }
 
         locals = {
-          documents: Statique.discover.documents.values,
+          documents: Statique.discover.documents,
           collections: Statique.discover.collections,
           document: @document
         }
@@ -85,7 +85,6 @@ class Statique
     end
 
     if Statique.mode.server?
-      # Mout routes at once, as calling #route clears the previous block
       route do |r|
         r.public if Statique.public?
         r.assets if Statique.assets

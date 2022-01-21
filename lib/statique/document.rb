@@ -11,15 +11,13 @@ class Statique
       @file, @meta, @content = file.freeze, Hashie::Mash.new(parsed.front_matter).freeze, parsed.content.freeze
     end
 
-    def mount_point
+    def path
       case basename
       when "index.slim" then "/"
       else
         "/#{meta.permalink || basename.delete_suffix(extname).delete_prefix(Statique.content.to_s)}"
       end.freeze
     end
-
-    alias_method :path, :mount_point
 
     def view_name
       basename.delete_suffix(extname).freeze
