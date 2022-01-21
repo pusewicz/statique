@@ -8,8 +8,7 @@ require "uri"
 
 require_relative "statique/version"
 
-libx = File.expand_path("..", __FILE__)
-$LOAD_PATH.unshift(libx) unless $LOAD_PATH.include?(libx)
+$LOAD_PATH.unshift(File.expand_path("..", __FILE__))
 
 class Statique
   include Singleton
