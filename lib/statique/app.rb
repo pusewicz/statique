@@ -11,13 +11,13 @@ require "forwardable"
 class Statique
   class App < Roda
     extend Forwardable
+    include Pagy::Backend
+    include Pagy::Frontend
+
     PAGE_REGEX = /(.*)\/page\/(\d+)/
     use Rack::Rewrite do
       rewrite PAGE_REGEX, "$1?page=$2"
     end
-
-    include Pagy::Backend
-    include Pagy::Frontend
 
     Pagy::DEFAULT[:items] = 3
 
