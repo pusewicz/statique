@@ -1,8 +1,17 @@
 require:
   - standard
+  - rubocop-minitest
+  - rubocop-rake
 
 inherit_gem:
   standard: config/base.yml
 
 AllCops:
   NewCops: enable
+  TargetRubyVersion: 3.1
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Gemspec/OrderedDependencies:
+  Enabled: true
