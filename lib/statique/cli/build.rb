@@ -9,6 +9,7 @@ class Statique
       end
 
       def run
+        FileUtils.mkdir_p(Statique.destination)
         copy_public_assets
         build_pages
 
