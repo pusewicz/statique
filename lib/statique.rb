@@ -38,7 +38,7 @@ class Statique
   end
 
   def pwd
-    @pwd ||= Pathname.pwd.freeze # TODO: Freeze?
+    @pwd ||= Pathname.pwd.freeze
   end
 
   def version
