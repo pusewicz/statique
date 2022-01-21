@@ -6,6 +6,8 @@ require "pathname"
 require "singleton"
 require "uri"
 
+::FrontMatterParser::SyntaxParser::Builder = FrontMatterParser::SyntaxParser::MultiLineComment["=begin", "=end"]
+
 require_relative "statique/version"
 
 $LOAD_PATH.unshift(File.expand_path("..", __FILE__))
@@ -19,10 +21,6 @@ class Statique
   autoload :Discover, "statique/discover"
   autoload :Document, "statique/document"
   autoload :Mode, "statique/mode"
-
-  def initialize
-    register_front_matter_parsers
-  end
 
   def app
     @app ||= App.freeze.app
@@ -95,12 +93,6 @@ class Statique
   end
 
   def url(document)
-    URI.join(root_url, document.mount_point)
-  end
-
-  private
-
-  def register_front_matter_parsers
-    ::FrontMatterParser::SyntaxParser.const_set(:Builder, FrontMatterParser::SyntaxParser::MultiLineComment["=begin", "=end"])
+    File.join(root_url, document.mount_point)
   end
 end
