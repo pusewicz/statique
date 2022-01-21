@@ -18,3 +18,4 @@ gem "typeprof"
 gem "solargraph"
 
 gem "overcommit"
+gem "bundle-audit", "~> 0.1.0"
