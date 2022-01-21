@@ -3,9 +3,26 @@
 require "roda"
 require "slim"
 require "digest/sha1"
+require "pagy"
+require "pagy/extras/array"
+require "rack/rewrite"
 
 class Statique
   class App < Roda
+    PAGE_REGEX = /(.*)\/page\/(\d+)/
+    use Rack::Rewrite do
+      rewrite PAGE_REGEX, "$1?page=$2"
+    end
+
+    include Pagy::Backend
+    include Pagy::Frontend
+
+    Pagy::DEFAULT[:items] = 3
+
+    def pagination_nav
+      pagy_nav(@pagy).gsub(/\?page=(\d+)/, '/page/\1')
+    end
+
     statique = Statique.instance
 
     opts[:root] = statique.pwd
@@ -30,9 +47,9 @@ class Statique
       end
     end
 
-    statique.discover.routes.each do |route, document|
-      Statique.ui.debug "Defining route", {route:, file: document.file}
-      static_get route do |r|
+    statique.discover.routes.each do |path, document|
+      Statique.ui.debug "Defining route", {path:, file: document.file}
+      static_get path do |r|
         @document = statique.discover.documents[document.file.to_s]
 
         locals = {
@@ -41,6 +58,13 @@ class Statique
           collections: statique.discover.collections,
           document: @document
         }
+
+        if @document.meta.paginates
+          @pagy, items = pagy_array(statique.discover.collections[@document.meta.paginates].to_a, {page: r.params.fetch("page", 1)})
+          locals[@document.meta.paginates.to_sym] = items
+          locals[:paginator] = @pagy
+        end
+
         options = {
           engine: @document.engine_name,
           inline: @document.content,
