@@ -92,7 +92,6 @@ class Statique
   end
 
   def root_url
-    # TODO: Make it configurable
     @root_url ||= URI("https://www.layer22.com").freeze
   end
 
