@@ -58,7 +58,7 @@ class Statique
     def watch_for_changes
       require "filewatcher"
 
-      @filewatcher = Filewatcher.new([Statique.content, Statique.layouts])
+      @filewatcher = Filewatcher.new([Statique.paths.content, Statique.paths.layouts])
       @filewatcher_thread = Thread.new(@filewatcher) do |watcher|
         watcher.watch do |file, event|
           Statique.ui.debug "File change event", file: file, event: event
