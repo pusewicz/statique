@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   spec.add_dependency "builder", "~> 3.2.4"
+  spec.add_dependency "dry-configurable", "~> 0.14.0"
   spec.add_dependency "filewatcher", "~> 1.1.1"
   spec.add_dependency "front_matter_parser", "~> 1.0.1"
   spec.add_dependency "hashie", "~> 5.0.0"
