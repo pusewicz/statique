@@ -28,7 +28,7 @@ class Statique
     end
 
     def layout_name
-      meta.fetch("layout", "layout").freeze
+      meta.fetch("layout") { "layout" }.freeze
     end
 
     def title

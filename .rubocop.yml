@@ -13,5 +13,8 @@ AllCops:
 Style/FrozenStringLiteralComment:
   Enabled: true
 
+Style/RedundantFetchBlock:
+  Enabled: false
+
 Gemspec/OrderedDependencies:
   Enabled: true
