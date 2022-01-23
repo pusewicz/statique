@@ -9,16 +9,15 @@ require "uri"
 ::FrontMatterParser::SyntaxParser::Builder = FrontMatterParser::SyntaxParser::MultiLineComment["=begin", "=end"]
 
 require_relative "statique/version"
+require_relative "statique/discover"
+require_relative "statique/document"
+require_relative "statique/mode"
 
 $LOAD_PATH.unshift(File.expand_path("..", __FILE__))
 
 class Statique
   class Error < StandardError; end
 
-  autoload :App, "statique/app"
-  autoload :Discover, "statique/discover"
-  autoload :Document, "statique/document"
-  autoload :Mode, "statique/mode"
 
   class << self
     def app
