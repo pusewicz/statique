@@ -59,5 +59,9 @@ class Statique
     def url(document)
       File.join(root_url, document.path)
     end
+
+    def build_queue
+      @build_queue ||= Queue.new
+    end
   end
 end
