@@ -3,8 +3,6 @@
 require "roda"
 require "slim"
 require "digest/sha1"
-require "pagy"
-require "pagy/extras/array"
 require "rack/rewrite"
 require "forwardable"
 
