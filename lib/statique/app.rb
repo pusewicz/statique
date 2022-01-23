@@ -19,8 +19,6 @@ class Statique
       rewrite PAGE_REGEX, "$1?page=$2"
     end
 
-    Pagy::DEFAULT[:items] = 3
-
     def_delegators :Statique, :url, :root_url
 
     def pagination_nav
