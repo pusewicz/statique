@@ -4,6 +4,7 @@ require "roda"
 require "slim"
 require "digest/sha1"
 require "rack/rewrite"
+require "rack/rewrite/rule"
 require "forwardable"
 
 class Statique
