@@ -11,16 +11,10 @@ class TestMode < Minitest::Spec
   it "accepts server mode" do
     @mode = Statique::Mode.new("server")
     expect(@mode.server?).must_equal true
-
-    @mode = Statique::Mode.new(:server)
-    expect(@mode.server?).must_equal true
   end
 
   it "accepts build mode" do
     @mode = Statique::Mode.new("build")
-    expect(@mode.build?).must_equal true
-
-    @mode = Statique::Mode.new(:build)
     expect(@mode.build?).must_equal true
   end
 
