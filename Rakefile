@@ -3,6 +3,9 @@
 require "bundler/gem_tasks"
 require "rake/testtask"
 require "rubocop/rake_task"
+require "bundler/audit/task"
+
+Bundler::Audit::Task.new
 
 Rake::TestTask.new(:test) do |t|
   t.libs << "test"
@@ -12,7 +15,7 @@ end
 
 RuboCop::RakeTask.new
 
-task default: %i[test rubocop]
+task default: %i[test rubocop bundle:audit]
 
 namespace :docker do
   desc "Build docker image"
