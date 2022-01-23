@@ -21,3 +21,8 @@ jobs:
       run: bundle exec rake
     - name: Build gem
       run: bundle exec rake build
+    - name: Build Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        platforms: linux/amd64,linux/arm64
