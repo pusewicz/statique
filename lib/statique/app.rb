@@ -27,21 +27,21 @@ class Statique
       pagy_nav(@pagy).gsub(/\?page=(\d+)/, '/page/\1')
     end
 
-    opts[:root] = Statique.pwd
+    opts[:root] = Statique.paths.pwd
 
     plugin :environments
     plugin :static_routing
-    plugin :render, views: Statique.content.basename, engine: "slim", allowed_paths: [Statique.content.basename, Statique.layouts.basename]
-    plugin :partials, views: Statique.layouts.basename
+    plugin :render, views: Statique.paths.content.basename, engine: "slim", allowed_paths: [Statique.paths.content.basename, Statique.paths.layouts.basename]
+    plugin :partials, views: Statique.paths.layouts.basename
 
-    if Statique.mode.server? && Statique.public?
-      plugin :public, root: Statique.public.basename
+    if Statique.mode.server? && Statique.paths.public.exist?
+      plugin :public, root: Statique.paths.public.basename
     end
 
-    if Statique.assets?
-      css_files = Statique.assets.join("css").glob("*.{css,scss}")
-      js_files = Statique.assets.join("js").glob("*.js")
-      plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.destination, precompiled: Statique.destination.join("assets/manifest.json")
+    if Statique.paths.assets.exist?
+      css_files = Statique.paths.assets.join("css").glob("*.{css,scss}")
+      js_files = Statique.paths.assets.join("js").glob("*.js")
+      plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.paths.destination, precompiled: Statique.paths.destination.join("assets/manifest.json")
       plugin :assets_preloading
 
       Statique.mode.build do
@@ -86,8 +86,8 @@ class Statique
 
     if Statique.mode.server?
       route do |r|
-        r.public if Statique.public?
-        r.assets if Statique.assets
+        r.public if Statique.paths.public.exist?
+        r.assets if Statique.paths.assets.exist?
       end
     end
   end
