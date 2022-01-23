@@ -16,6 +16,7 @@ require_relative "statique/version"
 require_relative "statique/discover"
 require_relative "statique/document"
 require_relative "statique/mode"
+require_relative "statique/paginator"
 
 $LOAD_PATH.unshift(File.expand_path("..", __FILE__))
 
@@ -56,8 +57,8 @@ class Statique
       end
     end
 
-    def url(document)
-      File.join(root_url, document.path)
+    def url(document_or_path)
+      File.join(root_url, document_or_path.is_a?(Document) ? document_or_path.path : document_or_path)
     end
 
     def build_queue

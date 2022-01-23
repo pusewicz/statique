@@ -11,7 +11,6 @@ class Statique
   class App < Roda
     extend Forwardable
     include Pagy::Backend
-    include Pagy::Frontend
 
     PAGE_REGEX = /(.*)\/page\/(\d+)/
     use Rack::Rewrite do
@@ -19,10 +18,6 @@ class Statique
     end
 
     def_delegators :Statique, :url, :root_url
-
-    def pagination_nav
-      pagy_nav(@pagy).gsub(/\?page=(\d+)/, '/page/\1')
-    end
 
     opts[:root] = Statique.paths.pwd
 
@@ -61,7 +56,7 @@ class Statique
         if @document.meta.paginates
           @pagy, items = pagy_array(Statique.discover.collections[@document.meta.paginates].to_a, {page: r.params.fetch("page", 1)})
           locals[@document.meta.paginates.to_sym] = items
-          locals[:paginator] = @pagy
+          locals[:paginator] = Paginator.new(@pagy, items, document.path)
         end
 
         options = {
