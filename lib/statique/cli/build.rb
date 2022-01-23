@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rack/mock"
+require "statique/app"
 
 class Statique
   class CLI
@@ -33,7 +34,7 @@ class Statique
       end
 
       def mock_request
-        @mock_request ||= Rack::MockRequest.new(Statique.app)
+        @mock_request ||= Rack::MockRequest.new(Statique::App.freeze)
       end
 
       def copy_public_assets

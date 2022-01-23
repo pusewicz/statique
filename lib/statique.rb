@@ -34,10 +34,6 @@ class Statique
   setting :root_url, default: "/", reader: true
 
   class << self
-    def app
-      @app ||= App.freeze.app
-    end
-
     def discover
       @discover ||= Discover.new(paths.content)
     end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rack"
+require "statique/app"
 
 class Statique
   class CLI
@@ -35,7 +36,7 @@ class Statique
 
         logger = LoggerWrapper.new
 
-        Rack::Handler::WEBrick.run(Statique.app,
+        Rack::Handler::WEBrick.run(Statique::App.freeze,
           Port: @port,
           Host: "localhost",
           Logger: logger,
