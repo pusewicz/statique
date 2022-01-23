@@ -37,9 +37,9 @@ class Statique
       end
 
       def copy_public_assets
-        assets = Statique.public.glob("**/*.*")
+        assets = Statique.paths.public.glob("**/*.*")
         Statique.ui.info "Copying public assets", assets:
-        FileUtils.cp_r(assets, Statique.destination)
+          FileUtils.cp_r(assets, Statique.paths.destination)
       end
     end
   end
