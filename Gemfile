@@ -7,6 +7,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in statique.gemspec
 gemspec
 
+gem "benchmark-ips"
 gem "bundle-audit", "~> 0.1.0"
 gem "minitest", "~> 5.0"
 gem "minitest-around", "~> 0.5.0"
