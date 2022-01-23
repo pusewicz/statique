@@ -39,6 +39,12 @@ class Statique
       content
     end
 
+    def pagination_pages
+      return unless Statique.discover.collections.key?(meta.paginates)
+      collection = Statique.discover.collections[meta.paginates]
+      (collection.size.to_f / Pagy::DEFAULT[:items]).ceil
+    end
+
     def published_at
       @published_at ||= file.ctime.freeze
     end
