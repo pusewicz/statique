@@ -3,10 +3,13 @@
 require "rack/mock"
 require "benchmark"
 require "statique/app"
+require "memo_wise"
 
 class Statique
   class CLI
     class Build
+      prepend MemoWise
+
       def initialize(options)
         Thread.abort_on_exception = true
         @queue = Statique.build_queue
@@ -14,7 +17,7 @@ class Statique
 
       def run
         time = Benchmark.realtime do
-          FileUtils.mkdir_p(Statique.paths.destination)
+          create_directory(Statique.paths.destination)
           copy_public_assets
           build_pages
         end
@@ -41,7 +44,7 @@ class Statique
               if response.successful?
                 destination = Statique.paths.destination.join(File.extname(path).empty? ? "./#{path}/index.html" : "./#{path}")
                 Statique.ui.info "Building page", path: path
-                FileUtils.mkdir_p(destination.dirname)
+                create_directory(destination.dirname)
                 File.write(destination, response.body)
               else
                 Statique.ui.error "Error building page", path: document.path, status: response.status
@@ -62,6 +65,13 @@ class Statique
         Statique.ui.info "Copying public assets", assets:
           FileUtils.cp_r(assets, Statique.paths.destination)
       end
+
+      private
+
+      def create_directory(dir)
+        FileUtils.mkdir_p(dir)
+      end
+      memo_wise :create_directory
     end
   end
 end
