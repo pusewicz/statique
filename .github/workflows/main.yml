@@ -19,3 +19,5 @@ jobs:
         bundler-cache: true
     - name: Run the default task
       run: bundle exec rake
+    - name: Build gem
+      run: bundle exec rake build
