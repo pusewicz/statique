@@ -3,25 +3,23 @@
 require "front_matter_parser"
 require "hashie"
 require "pathname"
-require "singleton"
-require "uri"
 require "tty-logger"
-require "pagy"
-require "pagy/extras/array"
 require "dry-configurable"
 
 ::FrontMatterParser::SyntaxParser::Builder = FrontMatterParser::SyntaxParser::MultiLineComment["=begin", "=end"]
 
-require_relative "statique/version"
-require_relative "statique/discover"
-require_relative "statique/document"
-require_relative "statique/mode"
-require_relative "statique/paginator"
-
 $LOAD_PATH.unshift(File.expand_path("..", __FILE__))
+require "zeitwerk"
+
+loader = Zeitwerk::Loader.for_gem
+loader.inflector.inflect(
+  "cli" => "CLI"
+)
+loader.setup
 
 class Statique
   extend Dry::Configurable
+
   class Error < StandardError; end
 
   setting :paths, reader: true do
@@ -66,3 +64,5 @@ class Statique
     end
   end
 end
+
+loader.eager_load

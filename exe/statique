@@ -11,10 +11,8 @@ base_path = File.expand_path("../lib", __dir__)
 
 if File.exist?(base_path)
   require_relative "../lib/statique"
-  require_relative "../lib/statique/cli"
 else
   require "statique"
-  require "statique/cli"
 end
 
 Statique.ui.info "Statique", version: Statique::VERSION, environment: ENV["RACK_ENV"]

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "thor"
-require "tty-logger"
 
 class Statique
   class CLI < Thor

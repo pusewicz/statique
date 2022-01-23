@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-require "rack/mock"
+require "fileutils"
 require "benchmark"
-require "statique/app"
 require "memo_wise"
 
 class Statique

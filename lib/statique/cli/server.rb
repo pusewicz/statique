@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "rack"
-require "statique/app"
-
 class Statique
   class CLI
     class Server

@@ -4,8 +4,8 @@ require "roda"
 require "slim"
 require "digest/sha1"
 require "rack/rewrite"
-require "rack/rewrite/rule"
-require "forwardable"
+require "pagy"
+require "pagy/extras/array"
 
 class Statique
   class App < Roda
