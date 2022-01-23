@@ -5,6 +5,7 @@ require "hashie"
 require "pathname"
 require "singleton"
 require "uri"
+require "dry-configurable"
 
 ::FrontMatterParser::SyntaxParser::Builder = FrontMatterParser::SyntaxParser::MultiLineComment["=begin", "=end"]
 
@@ -16,8 +17,18 @@ require_relative "statique/mode"
 $LOAD_PATH.unshift(File.expand_path("..", __FILE__))
 
 class Statique
+  extend Dry::Configurable
   class Error < StandardError; end
 
+  setting :paths, reader: true do
+    setting :pwd, default: Pathname.pwd, constructor: -> { Pathname(_1) }
+    setting :public, default: Pathname.pwd.join("public"), constructor: -> { Statique.pwd.join(_1) }
+    setting :content, default: Pathname.pwd.join("content"), constructor: -> { Statique.pwd.join(_1) }
+    setting :layouts, default: Pathname.pwd.join("layouts"), constructor: -> { Statique.pwd.join(_1) }
+    setting :assets, default: Pathname.pwd.join("assets"), constructor: -> { Statique.pwd.join(_1) }
+    setting :destination, default: Pathname.pwd.join("dist"), constructor: -> { Statique.pwd.join(_1) }
+  end
+  setting :root_url, default: "/", reader: true
 
   class << self
     def app
@@ -25,7 +36,7 @@ class Statique
     end
 
     def discover
-      @discover ||= Discover.new(content)
+      @discover ||= Discover.new(paths.content)
     end
 
     def mode
@@ -44,50 +55,6 @@ class Statique
       @ui ||= TTY::Logger.new(output: $stdout) do |config|
         config.level = :debug if ENV["DEBUG"] == "true"
       end
-    end
-
-    def public
-      @public ||= pwd.join("public").freeze
-    end
-
-    def public?
-      public.directory?
-    end
-
-    def content
-      @content ||= pwd.join("content").freeze
-    end
-
-    def content?
-      content.directory?
-    end
-
-    def layouts
-      @layouts ||= pwd.join("layouts").freeze
-    end
-
-    def layouts?
-      layouts.directory?
-    end
-
-    def assets
-      @assets ||= pwd.join("assets").freeze
-    end
-
-    def assets?
-      assets.directory?
-    end
-
-    def destination
-      @destination ||= pwd.join("dist").freeze
-    end
-
-    def destination?
-      destination.directory?
-    end
-
-    def root_url
-      @root_url ||= "/"
     end
 
     def url(document)
