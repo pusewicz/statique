@@ -5,6 +5,9 @@ require "hashie"
 require "pathname"
 require "singleton"
 require "uri"
+require "tty-logger"
+require "pagy"
+require "pagy/extras/array"
 require "dry-configurable"
 
 ::FrontMatterParser::SyntaxParser::Builder = FrontMatterParser::SyntaxParser::MultiLineComment["=begin", "=end"]
