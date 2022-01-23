@@ -1,36 +1,56 @@
 # frozen_string_literal: true
 
 require "rack/mock"
+require "benchmark"
 require "statique/app"
 
 class Statique
   class CLI
     class Build
       def initialize(options)
+        Thread.abort_on_exception = true
+        @queue = Statique.build_queue
       end
 
       def run
-        FileUtils.mkdir_p(Statique.destination)
-        copy_public_assets
-        build_pages
+        time = Benchmark.realtime do
+          FileUtils.mkdir_p(Statique.paths.destination)
+          copy_public_assets
+          build_pages
+        end
 
-        Statique.ui.success "Done!"
+        Statique.ui.success "Done!", time: time
       end
 
       private
 
       def build_pages
         Statique.discover.documents.each do |document|
-          response = mock_request.get(document.path)
-          if response.successful?
-            destination = Statique.destination.join(File.extname(document.path).empty? ? "./#{document.path}/index.html" : "./#{document.path}")
-            Statique.ui.info "Building page", path: document.path
-            FileUtils.mkdir_p(destination.dirname)
-            File.write(destination, response.body)
-          else
-            Statique.ui.error "Error building page", path: document.path, status: response.status
+          @queue << document.path
+
+          if (pages = document.pagination_pages)
+            (2..pages).each { @queue << File.join(document.path, "/page/#{_1}") if _1 > 1 }
           end
         end
+
+        @threads = Array.new(8) do |n|
+          Thread.new("worker-#{n}") do
+            until @queue.empty?
+              path = @queue.pop
+              response = mock_request.get(path)
+              if response.successful?
+                destination = Statique.paths.destination.join(File.extname(path).empty? ? "./#{path}/index.html" : "./#{path}")
+                Statique.ui.info "Building page", path: path
+                FileUtils.mkdir_p(destination.dirname)
+                File.write(destination, response.body)
+              else
+                Statique.ui.error "Error building page", path: document.path, status: response.status
+              end
+            end
+          end
+        end
+
+        @threads.each(&:join)
       end
 
       def mock_request
