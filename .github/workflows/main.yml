@@ -41,7 +41,7 @@ jobs:
         context: .
         platforms: linux/amd64,linux/arm64
         build-args: |
-          RUBY_VERSION=$(cat .ruby-version | tr -d '\n')
+          RUBY_VERSION=${{ steps.ruby_version.outputs['ruby-version'] }}
           STATIQUE_VERSION=0.1.0
         tags: |
           pusewicz/statique:latest
