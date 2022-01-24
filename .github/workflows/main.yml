@@ -17,7 +17,7 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        bundler-cache: true
+      id: setup_ruby
 
     - name: Run tests
       run: bundle exec rake test
@@ -36,5 +36,9 @@ jobs:
       with:
         context: .
         platforms: linux/amd64,linux/arm64
-        build-args: RUBY_VERSION=3.1 STATIQUE_VERSION=0.1.0
-        tags: pusewicz/statique:latest pusewicz/statique:0.1.0
+        build-args: |
+          RUBY_VERSION=${{ steps.setup_ruby.outputs['ruby-prefix'].split('/')[4] }}
+          STATIQUE_VERSION=0.1.0
+        tags: |
+          pusewicz/statique:latest
+          pusewicz/statique:0.1.0
