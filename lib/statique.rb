@@ -3,6 +3,8 @@
 require "front_matter_parser"
 require "hashie"
 require "pathname"
+require "pagy"
+require "rack"
 require "tty-logger"
 require "dry-configurable"
 
@@ -64,5 +66,3 @@ class Statique
     end
   end
 end
-
-loader.eager_load
