@@ -16,8 +16,6 @@ jobs:
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
-      with:
-      id: setup_ruby
 
     - name: Run tests
       run: bundle exec rake test
