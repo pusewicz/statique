@@ -4,12 +4,11 @@ ARG STATIQUE_VERSION
 FROM ruby:$RUBY_VERSION-alpine AS build
 ARG STATIQUE_VERSION
 
-
 # RUN gem install statique --version $STATIQUE_VERSION
 WORKDIR /pkg
 COPY pkg/statique-$STATIQUE_VERSION.gem .
 RUN apk add --no-cache --update --virtual .build-deps build-base libffi-dev && \
-    gem install /pkg/statique-$STATIQUE_VERSION.gem && rm -rf /root/.local/share/gem && rm -rf /usr/local/bundle/cache/*.gem \
+    gem install /pkg/statique-$STATIQUE_VERSION.gem && rm -rf /root/.local/share/gem && rm -rf /usr/local/bundle/cache/*.gem && \
     apk del .build-deps
 
 FROM ruby:$RUBY_VERSION-alpine
