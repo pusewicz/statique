@@ -14,6 +14,7 @@ class Statique
     def path
       case basename
       when "index.slim" then "/"
+      when "index.md" then "/"
       else
         "/#{meta.permalink || basename.delete_suffix(extname).delete_prefix(Statique.paths.content.to_s)}"
       end.freeze
