@@ -1,30 +1,73 @@
+```
+  _________ __          __  .__
+ /   _____//  |______ _/  |_|__| ________ __   ____
+ \_____  \\   __\__  \\   __\  |/ ____/  |  \_/ __ \
+ /        \|  |  / __ \|  | |  < <_|  |  |  /\  ___/
+/_______  /|__| (____  /__| |__|\__   |____/  \___  >
+        \/           \/            |__|           \/
+```
+
 # Statique
 
 ![Ruby](https://github.com/pusewicz/statique/actions/workflows/main.yml/badge.svg)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/statique`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Statique is a static site generator written in [Ruby](https://www.ruby-lang.org/) and utilising [Roda](https://roda.jeremyevans.net/) for the Rack middleware. By default, it comes with support for [Slim](http://slim-lang.com/), [Sass](https://sass-lang.com/) and [Markdown](https://daringfireball.net/projects/markdown/).
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Install it as a [Whalebrew](https://github.com/whalebrew/whalebrew) package (recommended):
 
-```ruby
-gem 'statique'
-```
+    $ whalebrew install pusewicz/statique
+    
+Install it as a Docker image:
 
-And then execute:
+    $ docker pull pusewicz/statique
 
-    $ bundle install
-
-Or install it yourself as:
+Install it as a Ruby gem:
 
     $ gem install statique
 
 ## Usage
 
-TODO: Write usage instructions here
+### Generate your new Statique website
+
+#### Whalebrew package, Ruby gem
+
+    $ statique init my-website
+    
+#### Docker
+
+    $ docker run -it --rm -v "$PWD":/workdir -w /workdir pusewicz/statique init my-website
+    
+### Start the Statique server
+
+First, change into your new Statique website directory:
+
+    $ cd my-website
+    
+#### Whalebrew package, Ruby gem
+
+    $ statique server
+    
+#### Docker
+
+    $ docker run -it --rm -p 3000:3000 -v "$PWD":/workdir -w /workdir pusewicz/statique server
+    
+### Build your Statique website
+
+The final step before deploying your website to your preferred host is to build it. By default, the built website will be available in the `dist/` subdirectory.
+
+First, change into your new Statique website directory:
+
+    $ cd my-website
+    
+#### Whalebrew package, Ruby gem
+
+    $ statique build
+    
+#### Docker
+
+    $ docker run -it --rm -v "$PWD":/workdir -w /workdir pusewicz/statique build
 
 ## Development
 
