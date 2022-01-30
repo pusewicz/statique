@@ -26,4 +26,11 @@ class TestCLI < Minitest::Spec
       expect(out).must_include "Statique v0.1.0"
     end
   end
+
+  describe "invalid command" do
+    it "returns a non-zero exit code" do
+      statique "i-do-not-exist", raise_error: false
+      expect(last_command.failure?).must_equal true
+    end
+  end
 end

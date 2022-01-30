@@ -5,9 +5,9 @@ require_relative "command_execution"
 class Statique
   module Support
     module Helpers
-      def statique(cmd)
+      def statique(cmd, raise_error: true)
         exe = File.expand_path("../../exe/statique", __dir__)
-        sys_exec "#{exe} #{cmd}"
+        sys_exec "#{exe} #{cmd}", raise_error:
       end
 
       def command_executions
@@ -26,7 +26,7 @@ class Statique
         last_command.stderr
       end
 
-      def sys_exec(cmd)
+      def sys_exec(cmd, raise_error: true)
         require "open3"
         require "shellwords"
 
@@ -44,7 +44,7 @@ class Statique
           command_execution.exitstatus = status.exitstatus
 
           unless command_execution.success?
-            raise <<~ERROR
+            raise <<~ERROR if raise_error
               Invoking `#{cmd}` failed with output:
               ----------------------------------------------------------------------
               #{command_execution.stdboth}

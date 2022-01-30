@@ -18,6 +18,10 @@ class Statique
       super
     end
 
+    def self.exit_on_failure?
+      true
+    end
+
     def self.aliases_for(command_name)
       COMMAND_ALIASES.select { |k, _| k == command_name }.invert
     end
