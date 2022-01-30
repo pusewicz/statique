@@ -6,6 +6,7 @@ class Statique
   class CLI < Thor
     autoload :Server, "statique/cli/server"
     autoload :Build, "statique/cli/build"
+    autoload :Init, "statique/cli/init"
 
     package_name "Statique"
 
@@ -19,6 +20,12 @@ class Statique
 
     def self.aliases_for(command_name)
       COMMAND_ALIASES.select { |k, _| k == command_name }.invert
+    end
+
+    desc "init", "Initialize new Statique website"
+    argument :name, optional: true, desc: "Name of the directory to initialise the Statique website in"
+    def init
+      Init.new(name).run
     end
 
     desc "server", "Start Statique server"

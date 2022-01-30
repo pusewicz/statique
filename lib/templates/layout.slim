@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    meta charset="UTF-8"
+    meta name="generator" content="Statique #{Statique.version}"
+    title Statique Website
+    == assets(:css)
+    == assets(:js)
+  body
+    header
+      h1 Statique Website
+    main== yield
+    footer Made with Statique v#{Statique.version}
