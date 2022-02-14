@@ -35,6 +35,10 @@ jobs:
       id: ruby_version
       run: echo "::set-output name=ruby-version::$(cat .ruby-version | tr -d '\n')"
 
+    - name: Get Statique version
+      id: statique_version
+      run: echo "::set-output name=statique-version::$(ruby -Ilib/statique -r version -e 'print Statique::VERSION')"
+
     - name: Build Docker image
       uses: docker/build-push-action@v2
       with:
@@ -42,7 +46,7 @@ jobs:
         platforms: linux/amd64,linux/arm64
         build-args: |
           RUBY_VERSION=${{ steps.ruby_version.outputs['ruby-version'] }}
-          STATIQUE_VERSION=0.1.0
+          STATIQUE_VERSION=${{ steps.statique_version.outputs['statique-version'] }}
         tags: |
           pusewicz/statique:latest
-          pusewicz/statique:0.1.0
+          pusewicz/statique:${{ steps.statique_version.outputs['statique-version'] }}
