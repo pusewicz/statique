@@ -1,0 +1,41 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8" /><meta content="Statique 0.1.0" name="generator" /><title>Statique</title><link rel="stylesheet" integrity="sha256-9IF4DK7zFRzU5dTYIF2Go+peHykOtHe5vpP3cboan3A=" href="/assets/app.f481780caef3151cd4e5d4d8205d86a3ea5e1f290eb477b9be93f771ba1a9f70.css" /></head><body><header><h1>Statique–Static Site Generator</h1></header><main><p>Statique is a static site generator written in <a href="https://www.ruby-lang.org/">Ruby</a> and uses <a href="https://roda.jeremyevans.net/">Roda</a> for the Rack middleware. By default, it comes with support for <a href="http://slim-lang.com/">Slim</a>, <a href="https://sass-lang.com/">Sass</a> and <a href="https://daringfireball.net/projects/markdown/">Markdown</a>.</p>
+<h2>Installation</h2>
+<p>Install it as a <a href="https://github.com/whalebrew/whalebrew">Whalebrew</a> package (recommended):</p>
+<pre><code>$ whalebrew install pusewicz/statique
+</code></pre>
+<p>Install it as a Docker image:</p>
+<pre><code>$ docker pull pusewicz/statique
+</code></pre>
+<p>Install it as a Ruby gem:</p>
+<pre><code>$ gem install statique
+</code></pre>
+<h2>Usage</h2>
+<h3>Generate your new Statique website</h3>
+<h4>Whalebrew package, Ruby gem</h4>
+<pre><code>$ statique init my-website
+</code></pre>
+<h4>Docker</h4>
+<pre><code>$ docker run -it --rm -v &quot;$PWD&quot;:/workdir -w /workdir pusewicz/statique init my-website
+</code></pre>
+<h3>Start the Statique server</h3>
+<p>First, change into your new Statique website directory:</p>
+<pre><code>$ cd my-website
+</code></pre>
+<h4>Whalebrew package, Ruby gem</h4>
+<pre><code>$ statique server
+</code></pre>
+<h4>Docker</h4>
+<pre><code>$ docker run -it --rm -p 3000:3000 -v &quot;$PWD&quot;:/workdir -w /workdir pusewicz/statique server
+</code></pre>
+<h3>Build your Statique website</h3>
+<p>The final step before deploying your website to your preferred host is to build it. By default, the built website will be available in the <code>dist/</code> subdirectory.</p>
+<p>First, change into your new Statique website directory:</p>
+<pre><code>$ cd my-website
+</code></pre>
+<h4>Whalebrew package, Ruby gem</h4>
+<pre><code>$ statique build
+</code></pre>
+<h4>Docker</h4>
+<pre><code>$ docker run -it --rm -v &quot;$PWD&quot;:/workdir -w /workdir pusewicz/statique build
+</code></pre>
+</main><footer>Made with Statique v0.1.0</footer></body></html>
