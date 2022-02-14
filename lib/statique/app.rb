@@ -33,7 +33,7 @@ class Statique
     if Statique.paths.assets.exist?
       css_files = Statique.paths.assets.join("css").glob("*.{css,scss}")
       js_files = Statique.paths.assets.join("js").glob("*.js")
-      plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.paths.destination, precompiled: Statique.paths.destination.join("assets/manifest.json")
+      plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.paths.destination, precompiled: Statique.paths.destination.join("assets/manifest.json"), relative_paths: true
       plugin :assets_preloading
 
       Statique.mode.build do
