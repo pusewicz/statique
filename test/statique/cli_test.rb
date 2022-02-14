@@ -13,17 +13,17 @@ class TestCLI < Minitest::Spec
   describe "version" do
     it "returns version number with `version`" do
       statique "version"
-      expect(out).must_include "Statique v0.1.0"
+      expect(out).must_include "Statique v#{Statique::VERSION}"
     end
 
     it "returns version number with `-v`" do
       statique "-v"
-      expect(out).must_include "Statique v0.1.0"
+      expect(out).must_include "Statique v#{Statique::VERSION}"
     end
 
     it "returns version number with `--version`" do
       statique "--version"
-      expect(out).must_include "Statique v0.1.0"
+      expect(out).must_include "Statique v#{Statique::VERSION}"
     end
   end
 
