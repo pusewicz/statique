@@ -23,5 +23,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Build Site
-        uses: pusewicz/statique-action@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+      - run: gem install statique:0.1.0
+      - run: cd docs && statique build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/dist
