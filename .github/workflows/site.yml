@@ -28,8 +28,14 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
-      - run: gem install statique:0.1.1
+
+      - name: Get Statique version
+        id: statique_version
+        run: echo "::set-output name=statique-version::$(ruby -Ilib/statique -r version -e 'print Statique::VERSION')"
+
+      - run: gem install statique:${{ steps.statique_version.outputs['statique-version'] }}
       - run: cd docs && statique build
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
