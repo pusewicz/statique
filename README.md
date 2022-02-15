@@ -12,7 +12,7 @@
 ![Ruby](https://github.com/pusewicz/statique/actions/workflows/main.yml/badge.svg)
 [![Gem Version](https://badge.fury.io/rb/statique.svg)](https://badge.fury.io/rb/statique)
 
-Statique is a static site generator written in [Ruby](https://www.ruby-lang.org/) and utilising [Roda](https://roda.jeremyevans.net/) for the Rack middleware. By default, it comes with support for [Slim](http://slim-lang.com/), [Sass](https://sass-lang.com/) and [Markdown](https://daringfireball.net/projects/markdown/).
+Statique is a static site generator written in [Ruby](https://www.ruby-lang.org/) and utilising [Roda](https://roda.jeremyevans.net/) for the Rack middleware. By default, it comes with support for [Slim](http://slim-lang.com/) and [Markdown](https://daringfireball.net/projects/markdown/).
 
 ## Installation
 

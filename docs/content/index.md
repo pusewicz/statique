@@ -1,4 +1,4 @@
-Statique is a static site generator written in [Ruby](https://www.ruby-lang.org/) and uses [Roda](https://roda.jeremyevans.net/) for the Rack middleware. By default, it comes with support for [Slim](http://slim-lang.com/), [Sass](https://sass-lang.com/) and [Markdown](https://daringfireball.net/projects/markdown/).
+Statique is a static site generator written in [Ruby](https://www.ruby-lang.org/) and uses [Roda](https://roda.jeremyevans.net/) for the Rack middleware. By default, it comes with support for [Slim](http://slim-lang.com/) and [Markdown](https://daringfireball.net/projects/markdown/).
 
 ## Installation
 
