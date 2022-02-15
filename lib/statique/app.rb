@@ -4,13 +4,10 @@ require "roda"
 require "slim"
 require "digest/sha1"
 require "rack/rewrite"
-require "pagy"
-require "pagy/extras/array"
 
 class Statique
   class App < Roda
     extend Forwardable
-    include Pagy::Backend
 
     PAGE_REGEX = /(.*)\/page\/(\d+)/
     use Rack::Rewrite do
@@ -54,9 +51,9 @@ class Statique
         }
 
         if @document.meta.paginates
-          @pagy, items = pagy_array(Statique.discover.collections[@document.meta.paginates].to_a, {page: r.params.fetch("page", 1)})
-          locals[@document.meta.paginates.to_sym] = items
-          locals[:paginator] = Paginator.new(@pagy, items, document.path)
+          paginator = Paginator.new(Statique.discover.collections[@document.meta.paginates].to_a, document.path, r.params.fetch("page", 1))
+          locals[@document.meta.paginates.to_sym] = paginator.documents
+          locals[:paginator] = paginator
         end
 
         options = {

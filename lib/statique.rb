@@ -3,7 +3,6 @@
 require "front_matter_parser"
 require "hashie"
 require "pathname"
-require "pagy"
 require "rack"
 require "tty-logger"
 
@@ -16,6 +15,8 @@ require "statique/cli"
 require "statique/mode"
 require "statique/discover"
 require "statique/document"
+require "statique/configuration"
+require "statique/paginator"
 
 class Statique
   class Error < StandardError; end
@@ -48,7 +49,7 @@ class Statique
     end
 
     def url(document_or_path)
-      File.join(root_url, document_or_path.is_a?(Document) ? document_or_path.path : document_or_path)
+      File.join(configuration.root_url, document_or_path.is_a?(Document) ? document_or_path.path : document_or_path)
     end
 
     def build_queue

@@ -16,7 +16,7 @@ class Statique
       when "index.slim" then "/"
       when "index.md" then "/"
       else
-        "/#{meta.permalink || basename.delete_suffix(extname).delete_prefix(Statique.paths.content.to_s)}"
+        "/#{meta.permalink || basename.delete_suffix(extname).delete_prefix(Statique.configuration.paths.content.to_s)}"
       end.freeze
     end
 
@@ -43,7 +43,7 @@ class Statique
     def pagination_pages
       return unless Statique.discover.collections.key?(meta.paginates)
       collection = Statique.discover.collections[meta.paginates]
-      (collection.size.to_f / Pagy::DEFAULT[:items]).ceil
+      (collection.size.to_f / Paginator.per_page).ceil
     end
 
     def published_at
