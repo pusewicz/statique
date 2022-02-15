@@ -19,21 +19,21 @@ class Statique
 
     def_delegators :Statique, :url, :root_url
 
-    opts[:root] = Statique.paths.pwd
+    opts[:root] = Statique.configuration.paths.pwd
 
     plugin :environments
     plugin :static_routing
-    plugin :render, views: Statique.paths.content.basename, engine: "slim", allowed_paths: [Statique.paths.content.basename, Statique.paths.layouts.basename]
-    plugin :partials, views: Statique.paths.layouts.basename
+    plugin :render, views: Statique.configuration.paths.content.basename, engine: "slim", allowed_paths: [Statique.configuration.paths.content.basename, Statique.configuration.paths.layouts.basename]
+    plugin :partials, views: Statique.configuration.paths.layouts.basename
 
-    if Statique.mode.server? && Statique.paths.public.exist?
-      plugin :public, root: Statique.paths.public.basename
+    if Statique.mode.server? && Statique.configuration.paths.public.exist?
+      plugin :public, root: Statique.configuration.paths.public.basename
     end
 
-    if Statique.paths.assets.exist?
-      css_files = Statique.paths.assets.join("css").glob("*.{css,scss}")
-      js_files = Statique.paths.assets.join("js").glob("*.js")
-      plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.paths.destination, precompiled: Statique.paths.destination.join("assets/manifest.json"), relative_paths: true
+    if Statique.configuration.paths.assets.exist?
+      css_files = Statique.configuration.paths.assets.join("css").glob("*.{css,scss}")
+      js_files = Statique.configuration.paths.assets.join("js").glob("*.js")
+      plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.configuration.paths.destination, precompiled: Statique.configuration.paths.destination.join("assets/manifest.json"), relative_paths: true
       plugin :assets_preloading
 
       Statique.mode.build do
@@ -78,8 +78,8 @@ class Statique
 
     if Statique.mode.server?
       route do |r|
-        r.public if Statique.paths.public.exist?
-        r.assets if Statique.paths.assets.exist?
+        r.public if Statique.configuration.paths.public.exist?
+        r.assets if Statique.configuration.paths.assets.exist?
       end
     end
   end
