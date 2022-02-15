@@ -6,7 +6,6 @@ require "pathname"
 require "pagy"
 require "rack"
 require "tty-logger"
-require "dry-configurable"
 
 ::FrontMatterParser::SyntaxParser::Builder = FrontMatterParser::SyntaxParser::MultiLineComment["=begin", "=end"]
 
@@ -20,23 +19,15 @@ loader.inflector.inflect(
 loader.setup
 
 class Statique
-  extend Dry::Configurable
-
   class Error < StandardError; end
 
-  setting :paths, reader: true do
-    setting :pwd, default: Pathname.pwd, constructor: -> { Pathname(_1) }
-    setting :public, default: Pathname.pwd.join("public"), constructor: -> { Statique.pwd.join(_1) }
-    setting :content, default: Pathname.pwd.join("content"), constructor: -> { Statique.pwd.join(_1) }
-    setting :layouts, default: Pathname.pwd.join("layouts"), constructor: -> { Statique.pwd.join(_1) }
-    setting :assets, default: Pathname.pwd.join("assets"), constructor: -> { Statique.pwd.join(_1) }
-    setting :destination, default: Pathname.pwd.join("dist"), constructor: -> { Statique.pwd.join(_1) }
-  end
-  setting :root_url, default: "/", reader: true
-
   class << self
+    def configuration
+      @configuration ||= Configuration.new
+    end
+
     def discover
-      @discover ||= Discover.new(paths.content)
+      @discover ||= Discover.new(configuration.paths.content)
     end
 
     def mode

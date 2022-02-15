@@ -16,7 +16,7 @@ class Statique
 
       def run
         time = Benchmark.realtime do
-          create_directory(Statique.paths.destination)
+          create_directory(Statique.configuration.paths.destination)
           copy_public_assets
           build_pages
         end
@@ -41,7 +41,7 @@ class Statique
               path = @queue.pop
               response = mock_request.get(path)
               if response.successful?
-                destination = Statique.paths.destination.join(File.extname(path).empty? ? "./#{path}/index.html" : "./#{path}")
+                destination = Statique.configuration.paths.destination.join(File.extname(path).empty? ? "./#{path}/index.html" : "./#{path}")
                 Statique.ui.info "Building page", path: path
                 create_directory(destination.dirname)
                 File.write(destination, response.body)
@@ -60,9 +60,9 @@ class Statique
       end
 
       def copy_public_assets
-        assets = Statique.paths.public.glob("**/*.*")
+        assets = Statique.configuration.paths.public.glob("**/*.*")
         Statique.ui.info "Copying public assets", assets:
-          FileUtils.cp_r(assets, Statique.paths.destination)
+          FileUtils.cp_r(assets, Statique.configuration.paths.destination)
       end
 
       private
