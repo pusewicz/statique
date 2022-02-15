@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "set"
+
 class Statique
   class Discover
     attr_reader :documents, :collections, :files
