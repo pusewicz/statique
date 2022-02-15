@@ -29,6 +29,7 @@ class Statique
       end
 
       def run
+        require "statique/app"
         Statique.ui.info "Starting server", port: @port
 
         logger = LoggerWrapper.new

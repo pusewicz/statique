@@ -15,6 +15,7 @@ class Statique
       end
 
       def run
+        require "statique/app"
         time = Benchmark.realtime do
           create_directory(Statique.paths.destination)
           copy_public_assets

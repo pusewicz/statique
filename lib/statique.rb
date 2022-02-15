@@ -11,13 +11,12 @@ require "dry-configurable"
 ::FrontMatterParser::SyntaxParser::Builder = FrontMatterParser::SyntaxParser::MultiLineComment["=begin", "=end"]
 
 $LOAD_PATH.unshift(File.expand_path("..", __FILE__))
-require "zeitwerk"
 
-loader = Zeitwerk::Loader.for_gem
-loader.inflector.inflect(
-  "cli" => "CLI"
-)
-loader.setup
+require "statique/version"
+require "statique/cli"
+require "statique/mode"
+require "statique/discover"
+require "statique/document"
 
 class Statique
   extend Dry::Configurable
