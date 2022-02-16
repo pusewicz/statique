@@ -20,7 +20,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.0
+          ruby-version: 3.1
         if: ${{ steps.release.outputs.release_created }}
       - name: publish gem
         run: |
