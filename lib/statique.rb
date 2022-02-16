@@ -22,6 +22,10 @@ class Statique
   class Error < StandardError; end
 
   class << self
+    extend Forwardable
+
+    def_delegators :configuration, :root_url
+
     def configuration
       @configuration ||= Configuration.new
     end
