@@ -9,7 +9,7 @@ class Statique
     end
 
     def initialize(documents, path, page)
-      @path, @page = path, page.to_i || 1
+      @path, @page = path, [page.to_i, 1].max
 
       @total_documents = documents.size
       @offset = (self.class.per_page * (@page - 1))
