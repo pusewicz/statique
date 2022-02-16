@@ -3,16 +3,10 @@
 require "roda"
 require "slim"
 require "digest/sha1"
-require "rack/rewrite"
 
 class Statique
   class App < Roda
     extend Forwardable
-
-    PAGE_REGEX = /(.*)\/page\/(\d+)/
-    use Rack::Rewrite do
-      rewrite PAGE_REGEX, "$1?page=$2"
-    end
 
     def_delegators :Statique, :url, :root_url
 
@@ -39,30 +33,36 @@ class Statique
       end
     end
 
-    Statique.discover.documents.each do |document|
-      Statique.ui.debug "Defining route", {path: document.path, file: document.file}
-      static_get document.path do |r|
-        @document = Statique.discover.documents.find { _1.file == document.file }
+    route do |r|
+      if Statique.mode.server?
+        r.public if Statique.configuration.paths.public.exist?
+        r.assets if Statique.configuration.paths.assets.exist?
+      end
 
+      path, page = r.env["REQUEST_PATH"].split("/page/")
+
+      document = Statique.discover.documents.find { _1.path == path }
+
+      r.on(proc { document }) do
         locals = {
           documents: Statique.discover.documents,
           collections: Statique.discover.collections,
-          document: @document
+          document: document
         }
 
-        if @document.meta.paginates
-          paginator = Paginator.new(Statique.discover.collections[@document.meta.paginates].to_a, document.path, r.params.fetch("page", 1))
-          locals[@document.meta.paginates.to_sym] = paginator.documents
+        if document.meta.paginates
+          paginator = Paginator.new(Statique.discover.collections[document.meta.paginates].to_a, document.path, page)
+          locals[document.meta.paginates.to_sym] = paginator.documents
           locals[:paginator] = paginator
         end
 
         options = {
-          engine: @document.engine_name,
-          inline: @document.content,
+          engine: document.engine_name,
+          inline: document.content,
           locals:,
           layout_opts: {locals:},
-          cache_key: Digest::SHA1.hexdigest(@document.file.to_s + @document.content),
-          layout: "../layouts/#{@document.layout_name}"
+          cache_key: Digest::SHA1.hexdigest(document.file.to_s + document.content),
+          layout: "../layouts/#{document.layout_name}"
         }
 
         if document.layout_name
@@ -70,13 +70,6 @@ class Statique
         else
           render(options)
         end
-      end
-    end
-
-    if Statique.mode.server?
-      route do |r|
-        r.public if Statique.configuration.paths.public.exist?
-        r.assets if Statique.configuration.paths.assets.exist?
       end
     end
   end
