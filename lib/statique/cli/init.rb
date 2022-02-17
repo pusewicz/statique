@@ -13,7 +13,7 @@ class Statique
         create_directory(@dest_dir)
 
         write_file(@dest_dir.join("public/robots.txt"), "User-agent: *\nAllow: /")
-        write_file(@dest_dir.join("assets/css/app.scss"), %(@import url("https://cdn.jsdelivr.net/npm/water.css@2/out/water.css");))
+        write_file(@dest_dir.join("assets/css/app.css"), %(@import url("https://cdn.jsdelivr.net/npm/water.css@2/out/water.css");))
         write_file(@dest_dir.join("assets/js/app.js"), %(console.log("Hello from Statique!")))
 
         copy_template("index.md", @dest_dir.join("content"))

@@ -34,14 +34,14 @@ class Statique
 
     desc "server", "Start Statique server"
     def server
-      Statique.mode.server!
-      Server.new.run
+      statique.mode.server!
+      Server.new(statique).run
     end
 
     desc "build", "Build Statique site"
     def build
-      Statique.mode.build!
-      Build.new(options.dup).run
+      statique.mode.build!
+      Build.new(options.dup, statique).run
     end
 
     desc "version", "Prints the statique's version information"
@@ -50,5 +50,11 @@ class Statique
     end
 
     map aliases_for("version")
+
+    private
+
+    def statique
+      Statique.instance
+    end
   end
 end

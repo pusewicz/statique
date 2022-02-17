@@ -8,50 +8,54 @@ class Statique
   class App < Roda
     extend Forwardable
 
-    def_delegators :Statique, :url, :root_url
+    @statique = Statique.instance
 
-    opts[:root] = Statique.configuration.paths.pwd
+    def_delegators :@statique, :url, :root_url, :statique
+
+    opts[:root] = @statique.configuration.paths.pwd
 
     plugin :environments
     plugin :static_routing
-    plugin :render, views: Statique.configuration.paths.content.basename, engine: "slim", allowed_paths: [Statique.configuration.paths.content.basename, Statique.configuration.paths.layouts.basename]
-    plugin :partials, views: Statique.configuration.paths.layouts.basename
+    plugin :render, views: @statique.configuration.paths.content.basename, engine: "slim", allowed_paths: [@statique.configuration.paths.content.basename, @statique.configuration.paths.layouts.basename]
+    plugin :partials, views: @statique.configuration.paths.layouts.basename
 
-    if Statique.mode.server? && Statique.configuration.paths.public.exist?
-      plugin :public, root: Statique.configuration.paths.public.basename
+    if @statique.mode.server? && @statique.configuration.paths.public.exist?
+      plugin :public, root: @statique.configuration.paths.public.basename
     end
 
-    if Statique.configuration.paths.assets.exist?
-      css_files = Statique.configuration.paths.assets.join("css").glob("*.{css,scss}")
-      js_files = Statique.configuration.paths.assets.join("js").glob("*.js")
-      plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: Statique.configuration.paths.destination, precompiled: Statique.configuration.paths.destination.join("assets/manifest.json"), relative_paths: true
+    if @statique.configuration.paths.assets.exist?
+      css_files = @statique.configuration.paths.assets.join("css").glob("*.{css,scss}")
+      js_files = @statique.configuration.paths.assets.join("js").glob("*.js")
+      plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: @statique.configuration.paths.destination, precompiled: @statique.configuration.paths.destination.join("assets/manifest.json"), relative_paths: true
       plugin :assets_preloading
 
-      Statique.mode.build do
+      @statique.mode.build do
         compiled = compile_assets
-        Statique.ui.info "Compiling assets", css: compiled["css"], js: compiled["js"]
+        @statique.ui.info "Compiling assets", css: compiled["css"], js: compiled["js"]
       end
     end
 
     route do |r|
-      if Statique.mode.server?
-        r.public if Statique.configuration.paths.public.exist?
-        r.assets if Statique.configuration.paths.assets.exist?
+      @statique = Statique.instance
+      if @statique.mode.server?
+        r.public if @statique.configuration.paths.public.exist?
+        r.assets if @statique.configuration.paths.assets.exist?
       end
 
-      path, page = r.env["REQUEST_PATH"].split("/page/")
+      path, page = r.env["PATH_INFO"].split("/page/")
 
-      document = Statique.discover.documents.find { _1.path == path }
+      document = @statique.discover.documents.find { _1.path == path }
 
       r.on(proc { document }) do
         locals = {
-          documents: Statique.discover.documents,
-          collections: Statique.discover.collections,
-          document: document
+          collections: @statique.discover.collections,
+          document: document,
+          documents: @statique.discover.documents,
+          statique: @statique
         }
 
         if document.meta.paginates
-          paginator = Paginator.new(Statique.discover.collections[document.meta.paginates].to_a, document.path, page)
+          paginator = Paginator.new(@statique.discover.collections[document.meta.paginates].to_a, document.path, page, @statique)
           locals[document.meta.paginates.to_sym] = paginator.documents
           locals[:paginator] = paginator
         end

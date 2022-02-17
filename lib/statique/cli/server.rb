@@ -24,13 +24,14 @@ class Statique
         end
       end
 
-      def initialize(port: 3000)
+      def initialize(statique, port: 3000)
         @port = port
+        @statique = statique
       end
 
       def run
         require "statique/app"
-        Statique.ui.info "Starting server", port: @port
+        @statique.ui.info "Starting server", port: @port
 
         logger = LoggerWrapper.new
 
@@ -42,7 +43,7 @@ class Statique
       end
 
       def stop
-        Statique.ui.info "Stopping server"
+        @statique.ui.info "Stopping server"
         Rack::Handler::WEBrick.shutdown
       end
 
@@ -52,7 +53,7 @@ class Statique
         end
 
         def puts(message)
-          Statique.ui.public_send(@type, message)
+          @statique.ui.public_send(@type, message)
         end
 
         def write(message)

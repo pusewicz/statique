@@ -14,21 +14,22 @@ class Statique
 
     GLOB = "**/*.{#{SUPPORTED_EXTENSIONS.join(",")}}"
 
-    def initialize(root)
+    def initialize(root, statique)
       @root = root
       @documents = []
       @collections = Hashie::Mash.new { |hash, key| hash[key] = Set.new }
+      @statique = statique
 
       discover_files!
       discover!
 
-      Statique.mode.build do
+      @statique.mode.build do
         @files.freeze
         @documents.freeze
         @collections.freeze
       end
 
-      watch_for_changes if Statique.mode.server?
+      watch_for_changes if @statique.mode.server?
     end
 
     private
@@ -36,7 +37,7 @@ class Statique
     def discover_files!
       @files = @root.glob(GLOB)
     ensure
-      Statique.ui.debug "Discovered files", count: @files.size
+      @statique.ui.debug "Discovered files", count: @files.size
     end
 
     def discover!
@@ -46,7 +47,7 @@ class Statique
     end
 
     def process(file)
-      document = Document.new(file)
+      document = Document.new(file, @statique)
 
       documents << document
 
@@ -58,20 +59,20 @@ class Statique
     def watch_for_changes
       require "filewatcher"
 
-      @filewatcher = Filewatcher.new([Statique.configuration.paths.content, Statique.configuration.paths.layouts])
+      @filewatcher = Filewatcher.new([@statique.configuration.paths.content, @statique.configuration.paths.layouts])
       @filewatcher_thread = Thread.new(@filewatcher) do |watcher|
         watcher.watch do |file, event|
-          Statique.ui.debug "File change event", file: file, event: event
+          @statique.ui.debug "File change event", file: file, event: event
           discover_files!
           path = Pathname.new(file)
           remove_file!(path)
           process(path) unless event == :deleted
         end
       end
-      Statique.ui.debug "Started file watcher", filewatcher: @filewatcher, thread: @filewatcher_thread
+      @statique.ui.debug "Started file watcher", filewatcher: @filewatcher, thread: @filewatcher_thread
 
       at_exit do
-        Statique.ui.debug "Closing file watcher", thread: @filewatcher_thread
+        @statique.ui.debug "Closing file watcher", thread: @filewatcher_thread
         @filewatcher.stop
         @filewatcher.finalize
         @filewatcher_thread.join

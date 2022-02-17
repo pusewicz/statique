@@ -6,9 +6,9 @@ class Statique
   class Document
     attr_reader :file, :meta, :content
 
-    def initialize(file)
+    def initialize(file, statique)
       parsed = FrontMatterParser::Parser.parse_file(file)
-      @file, @meta, @content = file.freeze, Hashie::Mash.new(parsed.front_matter).freeze, parsed.content.freeze
+      @file, @meta, @content, @statique = file.freeze, Hashie::Mash.new(parsed.front_matter).freeze, parsed.content.freeze, statique
     end
 
     def path
@@ -16,7 +16,7 @@ class Statique
       when "index.slim" then "/"
       when "index.md" then "/"
       else
-        "/#{meta.permalink || basename.delete_suffix(extname).delete_prefix(Statique.configuration.paths.content.to_s)}"
+        "/#{meta.permalink || basename.delete_suffix(extname).delete_prefix(@statique.configuration.paths.content.to_s)}"
       end.freeze
     end
 
@@ -41,8 +41,8 @@ class Statique
     end
 
     def pagination_pages
-      return unless Statique.discover.collections.key?(meta.paginates)
-      collection = Statique.discover.collections[meta.paginates]
+      return unless @statique.discover.collections.key?(meta.paginates)
+      collection = @statique.discover.collections[meta.paginates]
       (collection.size.to_f / Paginator.per_page).ceil
     end
 

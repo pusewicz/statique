@@ -8,8 +8,10 @@ class Statique
       @per_page ||= 10
     end
 
-    def initialize(documents, path, page)
+    def initialize(documents, path, page, statique = Statique.instance)
       @path, @page = path, [page.to_i, 1].max
+
+      @statique = statique
 
       @total_documents = documents.size
       @offset = (self.class.per_page * (@page - 1))
@@ -53,9 +55,9 @@ class Statique
       return unless page
 
       if page == 1
-        Statique.url(File.join(@path))
+        @statique.url(File.join(@path))
       else
-        Statique.url(File.join(@path, "page", page.to_s))
+        @statique.url(File.join(@path, "page", page.to_s))
       end
     end
   end
