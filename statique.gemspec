@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "front_matter_parser", "~> 1.0.1"
   spec.add_dependency "hashie", "~> 5.0.0"
   spec.add_dependency "memo_wise", "~> 1.6.0"
-  spec.add_dependency "roda", "~> 3.52"
+  spec.add_dependency "roda", "~> 3.53"
   spec.add_dependency "slim", "~> 4.1.0"
   spec.add_dependency "thor", "~> 1.2.1"
   spec.add_dependency "tilt", "~> 2.0.10"
