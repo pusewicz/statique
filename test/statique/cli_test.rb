@@ -39,6 +39,18 @@ class TestCLI < Minitest::Spec
     end
   end
 
+  describe "build" do
+    it "builds the website" do
+      statique "init"
+      statique "build"
+
+      assert @dir.join("dist/robots.txt").exist?
+      assert @dir.join("dist/index.html").exist?
+
+      assert_includes @dir.join("dist/index.html").read, "<footer>Made with Statique v#{Statique::VERSION}</footer>"
+    end
+  end
+
   describe "invalid command" do
     it "returns a non-zero exit code" do
       statique "i-do-not-exist", raise_error: false
