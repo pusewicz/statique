@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+### [0.1.4](https://github.com/pusewicz/statique/compare/v0.1.3...v0.1.4) (2022-02-17)
+
+
+### Bug Fixes
+
+* Drop tilt direct dependency ([d893a2e](https://github.com/pusewicz/statique/commit/d893a2e847e6317e6e7b80d1179ecd966e1bfc3a))
+
 ### [0.1.3](https://github.com/pusewicz/statique/compare/v0.1.1...v0.1.3) (2022-02-16)
 
 
