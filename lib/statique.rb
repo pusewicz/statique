@@ -3,61 +3,58 @@
 require "front_matter_parser"
 require "hashie"
 require "pathname"
-require "rack"
+require "singleton"
 require "tty-logger"
 
 ::FrontMatterParser::SyntaxParser::Builder = FrontMatterParser::SyntaxParser::MultiLineComment["=begin", "=end"]
 
 $LOAD_PATH.unshift(File.expand_path("..", __FILE__))
 
-require "statique/version"
 require "statique/cli"
-require "statique/mode"
-require "statique/discover"
-require "statique/document"
-require "statique/configuration"
-require "statique/paginator"
 
 class Statique
+  include Singleton
+  extend Forwardable
+
   class Error < StandardError; end
 
-  class << self
-    extend Forwardable
+  autoload :Configuration, "statique/configuration"
+  autoload :Discover, "statique/discover"
+  autoload :Document, "statique/document"
+  autoload :Mode, "statique/mode"
+  autoload :Paginator, "statique/paginator"
+  autoload :VERSION, "statique/version"
 
-    def_delegators :configuration, :root_url
+  def_delegators :configuration, :root_url
 
-    def configuration
-      @configuration ||= Configuration.new
+  attr_reader :configuration, :discover, :mode, :pwd, :build_queue
+
+  def initialize
+    @mode = Mode.new
+    @configuration = Configuration.new
+    @discover = Discover.new(configuration.paths.content, self)
+    @pwd = Pathname.pwd.freeze
+  end
+
+  def statique
+    self.class.instance
+  end
+
+  def version
+    VERSION
+  end
+
+  def ui
+    self.class.ui
+  end
+
+  def self.ui
+    @ui ||= TTY::Logger.new(output: $stdout) do |config|
+      config.level = :debug if ENV["DEBUG"] == "true"
     end
+  end
 
-    def discover
-      @discover ||= Discover.new(configuration.paths.content)
-    end
-
-    def mode
-      @mode ||= Mode.new
-    end
-
-    def pwd
-      @pwd ||= Pathname.pwd.freeze
-    end
-
-    def version
-      VERSION
-    end
-
-    def ui
-      @ui ||= TTY::Logger.new(output: $stdout) do |config|
-        config.level = :debug if ENV["DEBUG"] == "true"
-      end
-    end
-
-    def url(document_or_path)
-      File.join(configuration.root_url, document_or_path.is_a?(Document) ? document_or_path.path : document_or_path)
-    end
-
-    def build_queue
-      @build_queue ||= Queue.new
-    end
+  def url(document_or_path)
+    File.join(configuration.root_url, document_or_path.is_a?(Document) ? document_or_path.path : document_or_path)
   end
 end

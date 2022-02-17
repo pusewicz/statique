@@ -9,26 +9,27 @@ class Statique
     class Build
       prepend MemoWise
 
-      def initialize(options)
+      def initialize(options, statique)
         Thread.abort_on_exception = true
-        @queue = Statique.build_queue
+        @statique = statique
+        @queue = Queue.new
       end
 
       def run
         require "statique/app"
         time = Benchmark.realtime do
-          create_directory(Statique.configuration.paths.destination)
+          create_directory(@statique.configuration.paths.destination)
           copy_public_assets
           build_pages
         end
 
-        Statique.ui.success "Done!", time: time
+        @statique.ui.success "Done!", time: time
       end
 
       private
 
       def build_pages
-        Statique.discover.documents.each do |document|
+        @statique.discover.documents.each do |document|
           @queue << document.path
 
           if (pages = document.pagination_pages)
@@ -42,12 +43,12 @@ class Statique
               path = @queue.pop
               response = mock_request.get(path)
               if response.successful?
-                destination = Statique.configuration.paths.destination.join(File.extname(path).empty? ? "./#{path}/index.html" : "./#{path}")
-                Statique.ui.info "Building page", path: path
+                destination = @statique.configuration.paths.destination.join(File.extname(path).empty? ? "./#{path}/index.html" : "./#{path}")
+                @statique.ui.info "Building page", path: path
                 create_directory(destination.dirname)
                 File.write(destination, response.body)
               else
-                Statique.ui.error "Error building page", path: document.path, status: response.status
+                @statique.ui.error "Error building page", path: path, status: response.status
               end
             end
           end
@@ -61,9 +62,9 @@ class Statique
       end
 
       def copy_public_assets
-        assets = Statique.configuration.paths.public.glob("**/*.*")
-        Statique.ui.info "Copying public assets", assets:
-          FileUtils.cp_r(assets, Statique.configuration.paths.destination)
+        assets = @statique.configuration.paths.public.glob("**/*.*")
+        @statique.ui.info "Copying public assets", assets:
+          FileUtils.cp_r(assets, @statique.configuration.paths.destination)
       end
 
       private
