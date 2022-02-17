@@ -5,7 +5,7 @@ require "test_helper"
 class TestCLI < Minitest::Spec
   around do |test|
     Dir.mktmpdir("statique") do |dir|
-      @dir = dir
+      @dir = Pathname(dir)
       test.call
     end
   end
@@ -24,6 +24,30 @@ class TestCLI < Minitest::Spec
     it "returns version number with `--version`" do
       statique "--version"
       expect(out).must_include "Statique v#{Statique::VERSION}"
+    end
+  end
+
+  describe "init" do
+    it "creates the files structure" do
+      statique "init"
+
+      assert @dir.join("assets/css/app.css").exist?
+      assert @dir.join("assets/js/app.js").exist?
+      assert @dir.join("public/robots.txt").exist?
+      assert @dir.join("content/index.md").exist?
+      assert @dir.join("layouts/layout.slim").exist?
+    end
+  end
+
+  describe "build" do
+    it "builds the website" do
+      statique "init"
+      statique "build"
+
+      assert @dir.join("dist/robots.txt").exist?
+      assert @dir.join("dist/index.html").exist?
+
+      assert_includes @dir.join("dist/index.html").read, "<footer>Made with Statique v#{Statique::VERSION}</footer>"
     end
   end
 
