@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+### [0.1.5](https://github.com/pusewicz/statique/compare/v0.1.4...v0.1.5) (2022-04-05)
+
+
+### Bug Fixes
+
+* **release:** Update docker release process ([665e11e](https://github.com/pusewicz/statique/commit/665e11e0a5b08ff94c5a96332961c98c3f5e5ce9))
+
 ### [0.1.4](https://github.com/pusewicz/statique/compare/v0.1.3...v0.1.4) (2022-02-17)
 
 
