@@ -18,6 +18,6 @@ group :development do
   gem "rubocop-minitest", "~> 0.20.1"
   gem "rubocop-rake", "~> 0.6.0"
   gem "solargraph"
-  gem "standard", "~> 1.3"
+  gem "standard", "~> 1.14"
   gem "typeprof"
 end
