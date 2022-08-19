@@ -43,7 +43,7 @@ GEM
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     memo_wise (1.7.0)
-    minitest (5.16.2)
+    minitest (5.16.3)
     minitest-around (0.5.0)
       minitest (~> 5.0)
     nokogiri (1.13.7-arm64-darwin)
@@ -132,7 +132,7 @@ PLATFORMS
 DEPENDENCIES
   benchmark-ips
   bundle-audit (~> 0.1.0)
-  minitest (~> 5.0)
+  minitest (~> 5.16)
   minitest-around (~> 0.5.0)
   overcommit
   rake (~> 13.0)
