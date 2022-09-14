@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "rack/mock_request"
 require "fileutils"
 require "benchmark"
 require "memo_wise"
