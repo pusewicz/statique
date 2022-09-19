@@ -81,7 +81,7 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.21.0)
       parser (>= 3.1.1.0)
-    rubocop-minitest (0.22.0)
+    rubocop-minitest (0.22.1)
       rubocop (>= 0.90, < 2.0)
     rubocop-performance (1.14.3)
       rubocop (>= 1.7.0, < 2.0)
@@ -118,7 +118,7 @@ GEM
       pastel (~> 0.8)
     typeprof (0.21.3)
       rbs (>= 1.8.1)
-    unicode-display_width (2.2.0)
+    unicode-display_width (2.3.0)
     webrick (1.7.0)
     yard (0.9.28)
       webrick (~> 1.7.0)
@@ -135,7 +135,7 @@ DEPENDENCIES
   overcommit
   rake (~> 13.0)
   rbs
-  rubocop-minitest (~> 0.22.0)
+  rubocop-minitest (~> 0.22.1)
   rubocop-rake (~> 0.6.0)
   solargraph
   standard (~> 1.16)
