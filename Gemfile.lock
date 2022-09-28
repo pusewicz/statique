@@ -63,7 +63,7 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     rbs (2.6.0)
-    regexp_parser (2.5.0)
+    regexp_parser (2.6.0)
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
@@ -92,7 +92,7 @@ GEM
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
-    solargraph (0.47.0)
+    solargraph (0.47.1)
       backport (~> 1.2)
       benchmark
       bundler (>= 1.17.2)
