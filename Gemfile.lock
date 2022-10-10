@@ -62,7 +62,7 @@ GEM
     rack (3.0.0)
     rainbow (3.1.1)
     rake (13.0.6)
-    rbs (2.6.0)
+    rbs (2.7.0)
     regexp_parser (2.6.0)
     reverse_markdown (2.1.1)
       nokogiri
