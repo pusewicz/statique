@@ -15,7 +15,7 @@ group :development do
   gem "overcommit"
   gem "rake", "~> 13.0"
   gem "rbs"
-  gem "rubocop-minitest", "~> 0.22.2"
+  gem "rubocop-minitest", "~> 0.23.0"
   gem "rubocop-rake", "~> 0.6.0"
   gem "solargraph"
   gem "standard", "~> 1.16"
