@@ -67,7 +67,7 @@ GEM
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
-    roda (3.61.0)
+    roda (3.62.0)
       rack
     rubocop (1.38.0)
       json (~> 2.3)
