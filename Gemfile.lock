@@ -127,6 +127,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  arm64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -145,7 +146,7 @@ DEPENDENCIES
   typeprof
 
 RUBY VERSION
-   ruby 3.1.0p0
+   ruby 3.1.3p185
 
 BUNDLED WITH
    2.3.7
