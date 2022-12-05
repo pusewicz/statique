@@ -19,7 +19,7 @@ GEM
   specs:
     ast (2.4.2)
     backport (1.2.0)
-    benchmark (0.2.0)
+    benchmark (0.2.1)
     benchmark-ips (2.10.0)
     builder (3.2.4)
     bundle-audit (0.1.0)
@@ -37,7 +37,7 @@ GEM
     hashie (5.0.0)
     iniparse (1.5.0)
     jaro_winkler (1.5.4)
-    json (2.6.2)
+    json (2.6.3)
     kramdown (2.4.0)
       rexml
     kramdown-parser-gfm (1.1.0)
@@ -61,8 +61,8 @@ GEM
       ast (~> 2.4.1)
     pastel (0.8.0)
       tty-color (~> 0.5)
-    racc (1.6.0)
-    rack (3.0.0)
+    racc (1.6.1)
+    rack (3.0.2)
     rainbow (3.1.1)
     rake (13.0.6)
     rbs (2.8.1)
