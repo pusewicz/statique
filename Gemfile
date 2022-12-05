@@ -17,7 +17,6 @@ group :development do
   gem "rbs"
   gem "rubocop-minitest", "~> 0.24.0"
   gem "rubocop-rake", "~> 0.6.0"
-  gem "rubocop-rspec", "~> 2.15"
   gem "solargraph"
   gem "standard", "~> 1.19"
   gem "typeprof"
