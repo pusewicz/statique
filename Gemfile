@@ -20,4 +20,5 @@ group :development do
   gem "solargraph"
   gem "standard", "~> 1.19"
   gem "typeprof"
+  gem "steep"
 end

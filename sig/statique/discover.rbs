@@ -1,0 +1,27 @@
+class Statique
+  class Discover
+    attr_reader documents: untyped
+
+    attr_reader collections: untyped
+
+    attr_reader files: untyped
+
+    SUPPORTED_EXTENSIONS: ::Array["slim" | "md" | "builder"]
+
+    GLOB: ::String
+
+    def initialize: (untyped root, untyped statique) -> void
+
+    private
+
+    def discover_files!: () -> untyped
+
+    def discover!: () -> untyped
+
+    def process: (untyped file) -> untyped
+
+    def watch_for_changes: () -> untyped
+
+    def remove_file!: (untyped path) -> untyped
+  end
+end

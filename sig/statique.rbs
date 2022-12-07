@@ -1,4 +1,10 @@
 class Statique
-  VERSION: String
-  # See the writing guide of rbs: https://github.com/ruby/rbs#guides
+  attr_reader pwd: Pathname
+  attr_reader mode: ::Statique::Mode
+  attr_reader configuration: ::Statique::Configuration
+  attr_reader discover: ::Statique::Discover
+
+  def version: () -> String
+  def url: (::Statique::Document | String) -> String
+  def self.instance: () -> singleton(Statique)
 end

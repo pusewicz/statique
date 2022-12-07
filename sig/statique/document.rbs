@@ -1,0 +1,33 @@
+class Statique
+  class Document
+    attr_reader file: untyped
+
+    attr_reader meta: untyped
+
+    attr_reader content: untyped
+
+    def initialize: (untyped file, untyped statique) -> void
+
+    def path: () -> untyped
+
+    def view_name: () -> untyped
+
+    def engine_name: () -> untyped
+
+    def layout_name: () -> untyped
+
+    def title: () -> untyped
+
+    def body: () -> untyped
+
+    def pagination_pages: () -> (nil | untyped)
+
+    def published_at: () -> untyped
+
+    private
+
+    def basename: () -> untyped
+
+    def extname: () -> untyped
+  end
+end

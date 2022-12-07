@@ -27,7 +27,7 @@ class Statique
 
   def_delegators :configuration, :root_url
 
-  attr_reader :configuration, :discover, :mode, :pwd, :build_queue
+  attr_reader :configuration, :discover, :mode, :pwd
 
   def initialize
     @mode = Mode.new

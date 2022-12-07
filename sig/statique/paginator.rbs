@@ -1,0 +1,29 @@
+class Statique
+  class Paginator
+    attr_reader page: untyped
+
+    attr_reader documents: untyped
+
+    attr_reader total_pages: untyped
+
+    attr_reader total_documents: untyped
+
+    def self.per_page: () -> Integer
+
+    def initialize: (untyped documents, untyped path, untyped page, ?untyped statique) -> void
+
+    def per_page: () -> untyped
+
+    def previous_page: () -> Integer?
+
+    def previous_page_path: () -> untyped
+
+    def next_page: () -> Integer?
+
+    def next_page_path: () -> untyped
+
+    private
+
+    def page_path: (Integer? page) -> String?
+  end
+end

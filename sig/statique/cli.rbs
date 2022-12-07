@@ -1,0 +1,23 @@
+class Statique
+  class CLI < Thor
+    COMMAND_ALIASES: ::Hash[::String, ::Array["-v" | "--version"]]
+
+    def initialize: (*untyped args) -> void
+
+    def self.exit_on_failure?: () -> true
+
+    def self.aliases_for: (untyped command_name) -> untyped
+
+    def init: () -> untyped
+
+    def server: () -> untyped
+
+    def build: () -> untyped
+
+    def version: () -> untyped
+
+    private
+
+    def statique: () -> untyped
+  end
+end

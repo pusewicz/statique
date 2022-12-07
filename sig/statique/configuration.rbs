@@ -1,0 +1,9 @@
+class Statique
+  class Configuration
+    attr_accessor root_url: String
+
+    attr_accessor paths: untyped
+
+    def initialize: () -> void
+  end
+end
