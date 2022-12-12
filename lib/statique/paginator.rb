@@ -37,7 +37,7 @@ class Statique
     end
 
     def next_page
-      page = [@total_pages, @page + 1].min
+      page = [@total_pages.zero? ? 1 : @total_pages, @page + 1].min
       if page == @page
         nil
       else
