@@ -21,3 +21,7 @@ group :development do
   gem "standard", "~> 1.19"
   gem "typeprof"
 end
+
+group :test do
+  gem "simplecov", require: false
+end

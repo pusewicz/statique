@@ -36,6 +36,14 @@ class TestMode < Minitest::Spec
     expect { Statique::Mode.new("non-existent") }.must_raise ArgumentError
   end
 
+  it "raises an exception on nil mode" do
+    expect { Statique::Mode.new(nil) }.must_raise ArgumentError
+  end
+
+  it "raises an exception on empty mode" do
+    expect { Statique::Mode.new("") }.must_raise ArgumentError
+  end
+
   describe "#server" do
     it "executes block if mode is server" do
       executed = false
