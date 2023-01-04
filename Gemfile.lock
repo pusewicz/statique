@@ -45,13 +45,13 @@ GEM
       kramdown (~> 2.0)
     language_server-protocol (3.17.0.2)
     memo_wise (1.7.0)
+    mini_portile2 (2.8.1)
     minitest (5.17.0)
     minitest-around (0.5.0)
       minitest (~> 5.0)
     module_methods (0.1.0)
-    nokogiri (1.13.10-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.13.10-x86_64-linux)
+    nokogiri (1.13.10)
+      mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     overcommit (0.59.1)
       childprocess (>= 0.6.3, < 5)
@@ -62,7 +62,7 @@ GEM
       ast (~> 2.4.1)
     pastel (0.8.0)
       tty-color (~> 0.5)
-    racc (1.6.1)
+    racc (1.6.2)
     rack (3.0.2)
     rainbow (3.1.1)
     rake (13.0.6)
@@ -156,7 +156,7 @@ DEPENDENCIES
   typeprof
 
 RUBY VERSION
-   ruby 3.1.3p185
+   ruby 3.2.0p-1
 
 BUNDLED WITH
    2.3.7
