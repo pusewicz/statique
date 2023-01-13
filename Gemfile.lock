@@ -127,7 +127,7 @@ GEM
     tty-color (0.6.0)
     tty-logger (0.6.0)
       pastel (~> 0.8)
-    typeprof (0.21.3)
+    typeprof (0.21.4)
       rbs (>= 1.8.1)
     unicode-display_width (2.4.2)
     webrick (1.7.0)
