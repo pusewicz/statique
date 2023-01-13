@@ -14,12 +14,10 @@ group :development do
   gem "minitest-around", "~> 0.5.0"
   gem "overcommit"
   gem "rake", "~> 13.0"
-  gem "rbs"
   gem "rubocop-minitest", "~> 0.25.1"
   gem "rubocop-rake", "~> 0.6.0"
   gem "solargraph"
   gem "standard", "~> 1.21"
-  gem "typeprof"
 end
 
 group :test do
