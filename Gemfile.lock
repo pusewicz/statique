@@ -66,7 +66,6 @@ GEM
     rack (3.0.3)
     rainbow (3.1.1)
     rake (13.0.6)
-    rbs (2.8.3)
     regexp_parser (2.6.1)
     reverse_markdown (2.1.1)
       nokogiri
@@ -127,8 +126,6 @@ GEM
     tty-color (0.6.0)
     tty-logger (0.6.0)
       pastel (~> 0.8)
-    typeprof (0.21.4)
-      rbs (>= 1.8.1)
     unicode-display_width (2.4.2)
     webrick (1.7.0)
     yard (0.9.28)
@@ -146,14 +143,12 @@ DEPENDENCIES
   minitest-around (~> 0.5.0)
   overcommit
   rake (~> 13.0)
-  rbs
   rubocop-minitest (~> 0.25.1)
   rubocop-rake (~> 0.6.0)
   simplecov
   solargraph
   standard (~> 1.21)
   statique!
-  typeprof
 
 RUBY VERSION
    ruby 3.2.0p-1
