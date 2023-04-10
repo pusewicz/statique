@@ -40,7 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "slim", ">= 4.1", "< 5.2"
   spec.add_dependency "thor", "~> 1.2.1"
   spec.add_dependency "tty-logger", "~> 0.6.0"
-  spec.add_dependency "webrick", "~> 1.7.0"
+  spec.add_dependency "webrick", ">= 1.7", "< 1.9"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
