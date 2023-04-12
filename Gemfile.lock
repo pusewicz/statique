@@ -28,7 +28,7 @@ GEM
       bundler (>= 1.2.0, < 3)
       thor (~> 1.0)
     childprocess (4.1.0)
-    commonmarker (0.23.8)
+    commonmarker (0.23.9)
     diff-lcs (1.5.0)
     docile (1.4.0)
     e2mmap (0.1.0)
