@@ -65,7 +65,7 @@ GEM
     pastel (0.8.0)
       tty-color (~> 0.5)
     racc (1.6.2)
-    rack (3.0.7)
+    rack (3.0.8)
     rainbow (3.1.1)
     rake (13.0.6)
     rbs (2.8.4)
@@ -73,7 +73,7 @@ GEM
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
-    roda (3.69.0)
+    roda (3.70.0)
       rack
     rubocop (1.52.1)
       json (~> 2.3)
