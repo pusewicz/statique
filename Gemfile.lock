@@ -76,7 +76,7 @@ GEM
     rexml (3.2.6)
     roda (3.71.0)
       rack
-    rubocop (1.56.0)
+    rubocop (1.56.2)
       base64 (~> 0.1.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -90,7 +90,7 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
       parser (>= 3.2.1.0)
-    rubocop-minitest (0.31.0)
+    rubocop-minitest (0.31.1)
       rubocop (>= 1.39, < 2.0)
     rubocop-performance (1.19.0)
       rubocop (>= 1.7.0, < 2.0)
@@ -165,7 +165,7 @@ DEPENDENCIES
   statique!
 
 RUBY VERSION
-   ruby 3.2.0p-1
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.3.7
