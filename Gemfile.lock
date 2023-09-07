@@ -47,7 +47,7 @@ GEM
     language_server-protocol (3.17.0.3)
     lint_roller (1.1.0)
     memo_wise (1.7.0)
-    minitest (5.19.0)
+    minitest (5.20.0)
     minitest-around (0.5.0)
       minitest (~> 5.0)
     module_methods (0.1.0)
@@ -153,7 +153,7 @@ PLATFORMS
 DEPENDENCIES
   benchmark-ips
   bundle-audit (~> 0.1.0)
-  minitest (~> 5.19)
+  minitest (~> 5.20)
   minitest-around (~> 0.5.0)
   overcommit
   rake (~> 13.0)
