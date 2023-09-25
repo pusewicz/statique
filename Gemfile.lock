@@ -76,7 +76,7 @@ GEM
     rexml (3.2.6)
     roda (3.72.0)
       rack
-    rubocop (1.56.2)
+    rubocop (1.56.3)
       base64 (~> 0.1.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -90,7 +90,7 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
       parser (>= 3.2.1.0)
-    rubocop-minitest (0.31.1)
+    rubocop-minitest (0.32.1)
       rubocop (>= 1.39, < 2.0)
     rubocop-performance (1.19.0)
       rubocop (>= 1.7.0, < 2.0)
@@ -157,7 +157,7 @@ DEPENDENCIES
   minitest-around (~> 0.5.0)
   overcommit
   rake (~> 13.0)
-  rubocop-minitest (~> 0.31.0)
+  rubocop-minitest (~> 0.32.1)
   rubocop-rake (~> 0.6.0)
   simplecov
   solargraph
