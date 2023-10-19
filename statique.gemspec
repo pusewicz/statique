@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "memo_wise", ">= 1.6", "< 1.8"
   spec.add_dependency "roda", "~> 3.53"
   spec.add_dependency "slim", ">= 4.1", "< 5.2"
-  spec.add_dependency "thor", "~> 1.2.1"
+  spec.add_dependency "thor", ">= 1.2.1", "< 1.4.0"
   spec.add_dependency "tty-logger", "~> 0.6.0"
   spec.add_dependency "webrick", ">= 1.7", "< 1.9"
 
