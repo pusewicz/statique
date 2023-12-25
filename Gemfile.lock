@@ -3,7 +3,7 @@ PATH
   specs:
     statique (0.1.5)
       builder (~> 3.2.4)
-      commonmarker (~> 0.23.2)
+      commonmarker (>= 0.23.2, < 1.1.0)
       filewatcher (>= 1.1.1, < 2.2.0)
       front_matter_parser (~> 1.0.1)
       hashie (~> 5.0.0)
@@ -28,7 +28,8 @@ GEM
       bundler (>= 1.2.0, < 3)
       thor (~> 1.0)
     childprocess (4.1.0)
-    commonmarker (0.23.10)
+    commonmarker (1.0.0-arm64-darwin)
+    commonmarker (1.0.0-x86_64-linux)
     diff-lcs (1.5.0)
     docile (1.4.0)
     e2mmap (0.1.0)
