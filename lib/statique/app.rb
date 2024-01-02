@@ -3,6 +3,9 @@
 require "roda"
 require "slim"
 require "digest/sha1"
+require "commonmarker"
+
+CommonMarker = Commonmarker
 
 class Statique
   class App < Roda
