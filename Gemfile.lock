@@ -59,7 +59,7 @@ GEM
       iniparse (~> 1.4)
       rexml (~> 3.2)
     parallel (1.24.0)
-    parser (3.2.2.4)
+    parser (3.3.0.2)
       ast (~> 2.4.1)
       racc
     pastel (0.8.0)
@@ -69,7 +69,7 @@ GEM
     rainbow (3.1.1)
     rake (13.1.0)
     rbs (2.8.4)
-    regexp_parser (2.8.3)
+    regexp_parser (2.9.0)
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.6)
@@ -88,7 +88,7 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.30.0)
       parser (>= 3.2.1.0)
-    rubocop-minitest (0.34.3)
+    rubocop-minitest (0.34.4)
       rubocop (>= 1.39, < 2.0)
       rubocop-ast (>= 1.30.0, < 2.0)
     rubocop-performance (1.20.1)
@@ -156,7 +156,7 @@ DEPENDENCIES
   minitest-around (~> 0.5.0)
   overcommit
   rake (~> 13.0)
-  rubocop-minitest (~> 0.34.3)
+  rubocop-minitest (~> 0.34.4)
   rubocop-rake (~> 0.6.0)
   simplecov
   solargraph
