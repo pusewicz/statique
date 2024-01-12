@@ -28,6 +28,8 @@ jobs:
 
       - name: Run tests
         run: bundle exec rake test
+        env:
+          TESTOPTS: "--quiet"
 
   merge:
     runs-on: ubuntu-latest
