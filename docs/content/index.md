@@ -26,20 +26,6 @@ Install it as a Ruby gem:
 
     $ docker run -it --rm -v "$PWD":/workdir -w /workdir pusewicz/statique init my-website
 
-### Start the Statique server
-
-First, change into your new Statique website directory:
-
-    $ cd my-website
-
-#### Whalebrew package, Ruby gem
-
-    $ statique server
-
-#### Docker
-
-    $ docker run -it --rm -p 3000:3000 -v "$PWD":/workdir -w /workdir pusewicz/statique server
-
 ### Build your Statique website
 
 The final step before deploying your website to your preferred host is to build it. By default, the built website will be available in the `dist/` subdirectory.

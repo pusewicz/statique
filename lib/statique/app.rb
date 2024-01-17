@@ -19,10 +19,6 @@ class Statique
     plugin :render, views: @statique.configuration.paths.content.basename, engine: "slim", allowed_paths: [@statique.configuration.paths.content.basename, @statique.configuration.paths.layouts.basename]
     plugin :partials, views: @statique.configuration.paths.layouts.basename
 
-    if @statique.mode.server? && @statique.configuration.paths.public.exist?
-      plugin :public, root: @statique.configuration.paths.public.basename
-    end
-
     if @statique.configuration.paths.assets.exist?
       css_files = @statique.configuration.paths.assets.join("css").glob("*.{css,scss}")
       js_files = @statique.configuration.paths.assets.join("js").glob("*.js")
@@ -37,10 +33,6 @@ class Statique
 
     route do |r|
       @statique = Statique.instance
-      if @statique.mode.server?
-        r.public if @statique.configuration.paths.public.exist?
-        r.assets if @statique.configuration.paths.assets.exist?
-      end
 
       path, page = r.env["PATH_INFO"].split("/page/")
 
