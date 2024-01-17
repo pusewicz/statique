@@ -15,6 +15,4 @@ else
   require "statique"
 end
 
-Statique.ui.info "Statique", version: Statique::VERSION, environment: ENV["RACK_ENV"]
-
-Statique::CLI.start
+Statique::CLI.new(ARGV).run
