@@ -33,7 +33,6 @@ class Statique
 
     desc "build", "Build Statique site"
     def build
-      statique.mode.build!
       Build.new(options.dup, statique).run
     end
 
