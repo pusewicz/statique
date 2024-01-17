@@ -25,10 +25,8 @@ class Statique
       plugin :assets, css: css_files.map { _1.basename.to_s }, js: js_files.map { _1.basename.to_s }, public: @statique.configuration.paths.destination, precompiled: @statique.configuration.paths.destination.join("assets/manifest.json"), relative_paths: true
       plugin :assets_preloading
 
-      @statique.mode.build do
-        compiled = compile_assets
-        @statique.ui.info "Compiling assets", css: compiled["css"], js: compiled["js"]
-      end
+      compiled = compile_assets
+      @statique.ui.info "Compiling assets", css: compiled["css"], js: compiled["js"]
     end
 
     route do |r|

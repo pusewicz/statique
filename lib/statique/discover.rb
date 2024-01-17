@@ -23,11 +23,9 @@ class Statique
       discover_files!
       discover!
 
-      @statique.mode.build do
-        @files.freeze
-        @documents.freeze
-        @collections.freeze
-      end
+      @files.freeze
+      @documents.freeze
+      @collections.freeze
     end
 
     private

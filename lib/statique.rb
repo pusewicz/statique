@@ -21,16 +21,14 @@ class Statique
   autoload :Configuration, "statique/configuration"
   autoload :Discover, "statique/discover"
   autoload :Document, "statique/document"
-  autoload :Mode, "statique/mode"
   autoload :Paginator, "statique/paginator"
   autoload :VERSION, "statique/version"
 
   def_delegators :configuration, :root_url
 
-  attr_reader :configuration, :discover, :mode, :pwd, :build_queue
+  attr_reader :configuration, :discover, :pwd, :build_queue
 
   def initialize
-    @mode = Mode.new
     @configuration = Configuration.new
     @discover = Discover.new(configuration.paths.content, self)
     @pwd = Pathname.pwd.freeze
