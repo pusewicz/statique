@@ -4,7 +4,6 @@ require "thor"
 
 class Statique
   class CLI < Thor
-    autoload :Server, "statique/cli/server"
     autoload :Build, "statique/cli/build"
     autoload :Init, "statique/cli/init"
 
@@ -30,12 +29,6 @@ class Statique
     argument :name, optional: true, desc: "Name of the directory to initialise the Statique website in"
     def init
       Init.new(name).run
-    end
-
-    desc "server", "Start Statique server"
-    def server
-      statique.mode.server!
-      Server.new(statique).run
     end
 
     desc "build", "Build Statique site"

@@ -28,8 +28,6 @@ class Statique
         @documents.freeze
         @collections.freeze
       end
-
-      watch_for_changes if @statique.mode.server?
     end
 
     private
@@ -53,29 +51,6 @@ class Statique
 
       Array(document.meta.collection).each do |collection|
         collections[collection] << document
-      end
-    end
-
-    def watch_for_changes
-      require "filewatcher"
-
-      @filewatcher = Filewatcher.new([@statique.configuration.paths.content, @statique.configuration.paths.layouts])
-      @filewatcher_thread = Thread.new(@filewatcher) do |watcher|
-        watcher.watch do |file, event|
-          @statique.ui.debug "File change event", file: file, event: event
-          discover_files!
-          path = Pathname.new(file)
-          remove_file!(path)
-          process(path) unless event == :deleted
-        end
-      end
-      @statique.ui.debug "Started file watcher", filewatcher: @filewatcher, thread: @filewatcher_thread
-
-      at_exit do
-        @statique.ui.debug "Closing file watcher", thread: @filewatcher_thread
-        @filewatcher.stop
-        @filewatcher.finalize
-        @filewatcher_thread.join
       end
     end
 
