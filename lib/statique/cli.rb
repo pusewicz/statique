@@ -1,47 +1,66 @@
 # frozen_string_literal: true
 
-require "thor"
+require "optparse"
 
 class Statique
-  class CLI < Thor
+  class CLI
     autoload :Build, "statique/cli/build"
     autoload :Init, "statique/cli/init"
 
-    package_name "Statique"
-
-    COMMAND_ALIASES = {
-      "version" => %w[-v --version]
-    }.freeze
-
-    def initialize(*args)
-      super
+    def initialize(argv)
+      @argv = argv
     end
 
-    def self.exit_on_failure?
-      true
+    def run
+      subcommand = @argv.shift
+
+      case subcommand
+      when "init"
+        init
+      when "build"
+        build
+      when "version", "-v", "--version"
+        version
+      when nil
+        # Print help and exit
+        puts <<~HELP
+          Usage: statique <command> [<args>]
+
+          Available commands:
+
+            init    Initialise a new Statique website
+            build   Build a Statique website
+            version Print Statique version information
+
+          Options:
+            -h, --help     Print this help message and exit
+            -v, --version  Print Statique version information
+        HELP
+
+        exit
+      else
+        puts "Unknown command: #{subcommand}"
+        exit 1
+      end
     end
 
-    def self.aliases_for(command_name)
-      COMMAND_ALIASES.select { |k, _| k == command_name }.invert
-    end
-
-    desc "init", "Initialize new Statique website"
-    argument :name, optional: true, desc: "Name of the directory to initialise the Statique website in"
     def init
+      name = @argv.shift
+      if name.nil?
+        puts "Please specify a directory name, e.g. #{$0} init my-website"
+
+        exit
+      end
       Init.new(name).run
     end
 
-    desc "build", "Build Statique site"
     def build
-      Build.new(options.dup, statique).run
+      Build.new(statique).run
     end
 
-    desc "version", "Prints the statique's version information"
     def version
-      Statique.ui.info "Statique v#{Statique::VERSION}"
+      puts "Statique v#{Statique::VERSION}"
     end
-
-    map aliases_for("version")
 
     private
 

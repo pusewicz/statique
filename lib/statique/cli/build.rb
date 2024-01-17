@@ -10,7 +10,7 @@ class Statique
     class Build
       prepend MemoWise
 
-      def initialize(options, statique)
+      def initialize(statique)
         Thread.abort_on_exception = true
         @statique = statique
         @queue = Queue.new
