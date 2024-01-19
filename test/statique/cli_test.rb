@@ -29,25 +29,26 @@ class TestCLI < Minitest::Spec
 
   describe "init" do
     it "creates the files structure" do
-      statique "init"
+      statique "init my-site"
 
-      assert_predicate @dir.join("assets/css/app.css"), :exist?
-      assert_predicate @dir.join("assets/js/app.js"), :exist?
-      assert_predicate @dir.join("public/robots.txt"), :exist?
-      assert_predicate @dir.join("content/index.md"), :exist?
-      assert_predicate @dir.join("layouts/layout.slim"), :exist?
+      assert_predicate @dir.join("my-site/assets/css/app.css"), :exist?
+      assert_predicate @dir.join("my-site/assets/js/app.js"), :exist?
+      assert_predicate @dir.join("my-site/public/robots.txt"), :exist?
+      assert_predicate @dir.join("my-site/content/index.md"), :exist?
+      assert_predicate @dir.join("my-site/layouts/layout.slim"), :exist?
     end
   end
 
   describe "build" do
     it "builds the website" do
-      statique "init"
-      statique "build"
+      statique "init my-site"
 
-      assert_predicate @dir.join("dist/robots.txt"), :exist?
-      assert_predicate @dir.join("dist/index.html"), :exist?
+      statique "build", dir: @dir.join("my-site")
 
-      assert_includes @dir.join("dist/index.html").read, "<footer>Made with Statique v#{Statique::VERSION}</footer>"
+      assert_predicate @dir.join("my-site/dist/index.html"), :exist?
+      assert_predicate @dir.join("my-site/dist/robots.txt"), :exist?
+
+      assert_includes @dir.join("my-site/dist/index.html").read, "<footer>Made with Statique v#{Statique::VERSION}</footer>"
     end
   end
 
