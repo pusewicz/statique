@@ -5,9 +5,9 @@ require_relative "command_execution"
 class Statique
   module Support
     module Helpers
-      def statique(cmd, raise_error: true)
+      def statique(cmd, raise_error: true, dir: @dir)
         exe = File.expand_path("../../exe/statique", __dir__)
-        sys_exec "#{exe} #{cmd}", raise_error:
+        sys_exec "#{exe} #{cmd}", raise_error:, dir:
       end
 
       def command_executions
@@ -26,14 +26,14 @@ class Statique
         last_command.stderr
       end
 
-      def sys_exec(cmd, raise_error: true)
+      def sys_exec(cmd, dir:, raise_error: true)
         require "open3"
         require "shellwords"
 
         env = ENV.to_h
-        command_execution = CommandExecution.new(cmd.to_s, @dir)
+        command_execution = CommandExecution.new(cmd.to_s, dir)
 
-        Open3.popen3(env, *cmd.shellsplit, chdir: @dir) do |stdin, stdout, stderr, wait_thr|
+        Open3.popen3(env, *cmd.shellsplit, chdir: dir) do |stdin, stdout, stderr, wait_thr|
           stdin.close
           stdout_read_thread = Thread.new { stdout.read }
           stderr_read_thread = Thread.new { stderr.read }
