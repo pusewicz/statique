@@ -28,9 +28,9 @@ class Statique
 
           Available commands:
 
-            init    Initialise a new Statique website
-            build   Build a Statique website
-            version Print Statique version information
+            init NAME    Initialise a new Statique website in the directory NAME
+            build        Build a Statique website
+            version      Print Statique version information
 
           Options:
             -h, --help     Print this help message and exit
