@@ -1,14 +1,17 @@
 # frozen_string_literal: true
 
+$LOAD_PATH.unshift(File.expand_path("..", __FILE__))
+
 require "front_matter_parser"
 require "hashie"
 require "pathname"
 require "singleton"
 require "tty-logger"
+require "tilt"
+require "statique/adapter/common_marker"
 
+CommonMarker = Statique::Adapter::CommonMarker
 ::FrontMatterParser::SyntaxParser::Builder = FrontMatterParser::SyntaxParser::MultiLineComment["=begin", "=end"]
-
-$LOAD_PATH.unshift(File.expand_path("..", __FILE__))
 
 require "statique/cli"
 
