@@ -6,7 +6,8 @@ class Statique
   class CLI
     class Init
       def initialize(name)
-        @dest_dir = Pathname.pwd.join(name || ".")
+        raise ArgumentError, "Name cannot be empty" if name.empty?
+        @dest_dir = Pathname.pwd.join(name)
       end
 
       def run
