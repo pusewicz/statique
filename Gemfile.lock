@@ -43,7 +43,7 @@ GEM
     language_server-protocol (3.17.0.3)
     lint_roller (1.1.0)
     memo_wise (1.8.0)
-    minitest (5.22.0)
+    minitest (5.22.2)
     minitest-around (0.5.0)
       minitest (~> 5.0)
     nokogiri (1.16.2-arm64-darwin)
