@@ -138,7 +138,7 @@ GEM
       pastel (~> 0.8)
     unicode-display_width (2.5.0)
     webrick (1.8.1)
-    yard (0.9.35)
+    yard (0.9.36)
 
 PLATFORMS
   arm64-darwin-21
