@@ -17,7 +17,7 @@ group :development do
   gem "rubocop-minitest", "~> 0.35.0"
   gem "rubocop-rake", "~> 0.6.0"
   gem "solargraph"
-  gem "standard", "~> 1.35"
+  gem "standard", "~> 1.36"
 end
 
 group :test do
