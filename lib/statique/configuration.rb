@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "ostruct"
+
 class Statique
   class Configuration
     attr_accessor :root_url
