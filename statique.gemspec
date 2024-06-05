@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "commonmarker", ">= 1.0.4", "< 1.2.0"
   spec.add_dependency "front_matter_parser", "~> 1.0.1"
   spec.add_dependency "hashie", "~> 5.0.0"
-  spec.add_dependency "memo_wise", ">= 1.6", "< 1.9"
+  spec.add_dependency "memo_wise", ">= 1.6", "< 1.10"
   spec.add_dependency "roda", "~> 3.53"
   spec.add_dependency "slim", ">= 4.1", "< 5.3"
   spec.add_dependency "tty-logger", "~> 0.6.0"
