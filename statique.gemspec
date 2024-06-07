@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency "builder", "~> 3.2.4"
+  spec.add_dependency "builder", ">= 3.2.4", "< 3.4.0"
   spec.add_dependency "commonmarker", ">= 1.0.4", "< 1.2.0"
   spec.add_dependency "front_matter_parser", "~> 1.0.1"
   spec.add_dependency "hashie", "~> 5.0.0"
