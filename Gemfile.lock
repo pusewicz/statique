@@ -54,25 +54,25 @@ GEM
       childprocess (>= 0.6.3, < 6)
       iniparse (~> 1.4)
       rexml (~> 3.2)
-    parallel (1.24.0)
-    parser (3.3.1.0)
+    parallel (1.25.1)
+    parser (3.3.2.0)
       ast (~> 2.4.1)
       racc
     pastel (0.8.0)
       tty-color (~> 0.5)
-    racc (1.7.3)
+    racc (1.8.0)
     rack (3.0.11)
     rainbow (3.1.1)
     rake (13.2.1)
     rbs (2.8.4)
-    regexp_parser (2.9.1)
+    regexp_parser (2.9.2)
     reverse_markdown (2.1.1)
       nokogiri
-    rexml (3.2.8)
-      strscan (>= 3.0.9)
+    rexml (3.3.0)
+      strscan
     roda (3.80.0)
       rack
-    rubocop (1.63.5)
+    rubocop (1.64.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -119,10 +119,10 @@ GEM
       thor (~> 1.0)
       tilt (~> 2.0)
       yard (~> 0.9, >= 0.9.24)
-    standard (1.36.0)
+    standard (1.37.0)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
-      rubocop (~> 1.63.0)
+      rubocop (~> 1.64.0)
       standard-custom (~> 1.0.0)
       standard-performance (~> 1.4)
     standard-custom (1.0.2)
@@ -158,7 +158,7 @@ DEPENDENCIES
   rubocop-rake (~> 0.6.0)
   simplecov
   solargraph
-  standard (~> 1.36)
+  standard (~> 1.37)
   statique!
 
 RUBY VERSION
