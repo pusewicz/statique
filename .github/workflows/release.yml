@@ -23,7 +23,7 @@ jobs:
           bump-minor-pre-major: true
           version-file: "lib/statique/version.rb"
 
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         if: ${{ steps.release.outputs.release_created }}
 
       - uses: ruby/setup-ruby@v1
