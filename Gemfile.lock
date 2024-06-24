@@ -55,7 +55,7 @@ GEM
       iniparse (~> 1.4)
       rexml (~> 3.2)
     parallel (1.25.1)
-    parser (3.3.2.0)
+    parser (3.3.3.0)
       ast (~> 2.4.1)
       racc
     pastel (0.8.0)
@@ -88,7 +88,7 @@ GEM
     rubocop-minitest (0.35.0)
       rubocop (>= 1.61, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-performance (1.21.0)
+    rubocop-performance (1.21.1)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rake (0.6.0)
@@ -119,7 +119,7 @@ GEM
       thor (~> 1.0)
       tilt (~> 2.0)
       yard (~> 0.9, >= 0.9.24)
-    standard (1.37.0)
+    standard (1.38.0)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
       rubocop (~> 1.64.0)
@@ -158,7 +158,7 @@ DEPENDENCIES
   rubocop-rake (~> 0.6.0)
   simplecov
   solargraph
-  standard (~> 1.37)
+  standard (~> 1.38)
   statique!
 
 RUBY VERSION
