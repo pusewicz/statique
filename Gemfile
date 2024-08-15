@@ -10,7 +10,7 @@ gemspec
 group :development do
   gem "benchmark-ips"
   gem "bundle-audit", "~> 0.1.0"
-  gem "minitest", "~> 5.24"
+  gem "minitest", "~> 5.25"
   gem "minitest-around", "~> 0.5.0"
   gem "overcommit"
   gem "rake", "~> 13.2"
