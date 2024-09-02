@@ -54,7 +54,7 @@ GEM
       childprocess (>= 0.6.3, < 6)
       iniparse (~> 1.4)
       rexml (~> 3.2)
-    parallel (1.26.2)
+    parallel (1.26.3)
     parser (3.3.4.2)
       ast (~> 2.4.1)
       racc
@@ -83,9 +83,9 @@ GEM
       rubocop-ast (>= 1.31.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.32.0)
+    rubocop-ast (1.32.1)
       parser (>= 3.3.1.0)
-    rubocop-minitest (0.35.1)
+    rubocop-minitest (0.36.0)
       rubocop (>= 1.61, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-performance (1.21.1)
@@ -154,7 +154,7 @@ DEPENDENCIES
   minitest-around (~> 0.5.0)
   overcommit
   rake (~> 13.2)
-  rubocop-minitest (~> 0.35.1)
+  rubocop-minitest (~> 0.36.0)
   rubocop-rake (~> 0.6.0)
   simplecov
   solargraph
