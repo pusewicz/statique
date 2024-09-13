@@ -70,7 +70,7 @@ GEM
       nokogiri
     rexml (3.3.6)
       strscan
-    roda (3.83.0)
+    roda (3.84.0)
       rack
     rubocop (1.65.1)
       json (~> 2.3)
