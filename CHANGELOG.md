@@ -1,5 +1,16 @@
 ## [Unreleased]
 
+## 0.1.3 (2025-01-20)
+
+
+### Bug Fixes
+
+* Do not rewrite paths to keep relative paths ([285eaf3](https://github.com/pusewicz/statique/commit/285eaf3446d7de2dba4fc3b55e7dd87b16092a04))
+* Drop tilt direct dependency ([d893a2e](https://github.com/pusewicz/statique/commit/d893a2e847e6317e6e7b80d1179ecd966e1bfc3a))
+* Initial values of the paginator ([3cbb0e0](https://github.com/pusewicz/statique/commit/3cbb0e0d680cae38e8cc65cde1299d0fca18a601))
+* **release:** Update docker release process ([665e11e](https://github.com/pusewicz/statique/commit/665e11e0a5b08ff94c5a96332961c98c3f5e5ce9))
+* Update delegated root_url ([ca5ea27](https://github.com/pusewicz/statique/commit/ca5ea273d9e636ed0481fa36fc298769a8697e95))
+
 ## [0.1.5](https://github.com/pusewicz/statique/compare/v0.1.4...v0.1.5) (2022-06-20)
 
 
