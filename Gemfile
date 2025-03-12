@@ -16,7 +16,7 @@ group :development do
   gem "rake", "~> 13.2"
   gem "rubocop-minitest", "~> 0.36.0"
   gem "rubocop-rake", "~> 0.6.0"
-  gem "standard", "~> 1.45"
+  gem "standard", "~> 1.47"
 end
 
 group :test do
