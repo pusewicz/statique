@@ -15,7 +15,7 @@ group :development do
   gem "overcommit"
   gem "rake", "~> 13.2"
   gem "rubocop-minitest", "~> 0.36.0"
-  gem "rubocop-rake", "~> 0.6.0"
+  gem "rubocop-rake", "~> 0.7.1"
   gem "standard", "~> 1.47"
 end
 
