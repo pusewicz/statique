@@ -70,9 +70,10 @@ GEM
       unicode-display_width (>= 2.4.0, < 4.0)
     rubocop-ast (1.38.1)
       parser (>= 3.3.1.0)
-    rubocop-minitest (0.36.0)
-      rubocop (>= 1.61, < 2.0)
-      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-minitest (0.37.1)
+      lint_roller (~> 1.1)
+      rubocop (>= 1.72.1, < 2.0)
+      rubocop-ast (>= 1.38.0, < 2.0)
     rubocop-performance (1.24.0)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1, < 2.0)
@@ -126,7 +127,7 @@ DEPENDENCIES
   minitest-around (~> 0.5.0)
   overcommit
   rake (~> 13.2)
-  rubocop-minitest (~> 0.36.0)
+  rubocop-minitest (~> 0.37.1)
   rubocop-rake (~> 0.7.1)
   simplecov
   standard (~> 1.47)
