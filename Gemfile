@@ -14,7 +14,7 @@ group :development do
   gem "minitest-around", "~> 0.5.0"
   gem "overcommit"
   gem "rake", "~> 13.2"
-  gem "rubocop-minitest", "~> 0.37.1"
+  gem "rubocop-minitest", "~> 0.38.0"
   gem "rubocop-rake", "~> 0.7.1"
   gem "standard", "~> 1.49"
 end
