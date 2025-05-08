@@ -1,5 +1,13 @@
 ## [Unreleased]
 
+## [0.1.4](https://github.com/pusewicz/statique/compare/v0.1.3...v0.1.4) (2025-05-08)
+
+
+### Bug Fixes
+
+* Drop tilt direct dependency ([d893a2e](https://github.com/pusewicz/statique/commit/d893a2e847e6317e6e7b80d1179ecd966e1bfc3a))
+* **release:** Update docker release process ([665e11e](https://github.com/pusewicz/statique/commit/665e11e0a5b08ff94c5a96332961c98c3f5e5ce9))
+
 ## 0.1.3 (2025-01-20)
 
 
