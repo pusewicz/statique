@@ -9,14 +9,14 @@ gemspec
 
 group :development do
   gem "benchmark-ips"
-  gem "bundle-audit", "~> 0.1.0"
-  gem "minitest", "~> 5.25"
-  gem "minitest-around", "~> 0.5.0"
+  gem "bundle-audit"
+  gem "minitest"
+  gem "minitest-around"
   gem "overcommit"
-  gem "rake", "~> 13.2"
-  gem "rubocop-minitest", "~> 0.38.0"
-  gem "rubocop-rake", "~> 0.7.1"
-  gem "standard", "~> 1.49"
+  gem "rake"
+  gem "rubocop-minitest"
+  gem "rubocop-rake"
+  gem "standard"
 end
 
 group :test do
